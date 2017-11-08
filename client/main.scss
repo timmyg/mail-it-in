@@ -1,0 +1,109 @@
+$enable-flex: true;
+$enable-shadows: true;
+
+// Core variables and mixins
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/custom";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/variables";
+
+@mixin box-shadow($shadow...) {
+  @if $enable-shadows {
+    box-shadow: $shadow;
+  }
+}
+
+@mixin transition($transition...) {
+  @if $enable-transitions {
+    transition: $transition;
+  }
+}
+
+// Utilities
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/breakpoints";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/hover";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/image";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/tag";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/reset-filter";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/resize";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/screen-reader";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/size";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/tab-focus";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/reset-text";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/text-emphasis";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/text-hide";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/text-truncate";
+
+// // Components
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/alert";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/buttons";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/cards";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/pagination";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/lists";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/list-group";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/nav-divider";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/forms";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/progress";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/table-row";
+
+// // Skins
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/background-variant";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/border-radius";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/gradients";
+
+// // Layout
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/clearfix";
+// @import "mixins/navbar-align";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/grid-framework";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/grid";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/mixins/pulls";
+
+// Reset and dependencies
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/normalize";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/print";
+
+// Core CSS
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/reboot";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/type";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/images";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/code";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/grid";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/tables";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/forms";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/buttons";
+
+// Components
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/animation";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/dropdown";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/button-group";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/input-group";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/custom-forms";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/nav";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/navbar";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/card";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/breadcrumb";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/pagination";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/tags";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/jumbotron";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/alert";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/progress";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/media";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/list-group";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/responsive-embed";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/close";
+
+// Components w/ JavaScript
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/modal";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/tooltip";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/popover";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/carousel";
+
+// Utility classes
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/background";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/clearfix";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/pulls";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/screenreaders";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/spacing";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/text";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/visibility";
+@import "{robomagnus:bootstrap4-sass}/bootstrap4/scss/utilities/flex";
+
+// @import "./style";
