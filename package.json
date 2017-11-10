@@ -2,11 +2,26 @@
   "name": "meteor-boilerplate",
   "private": true,
   "scripts": {
-    "start": "meteor run"
+    "start": "npm-run-all build:* --parallel watch:* meteor",
+    "meteor": "meteor run",
+    "test": "meteor test-app --driver-package practicalmeteor:mocha",
+    "build:css":
+      "node-sass --include-path node_modules ./client/main.scss | postcss --local-plugins --use autoprefixer --output ./client/bundle.css",
+    "watch:css": "nodemon -w client -e scss -x npm run build:css",
+    "meteor:build": "meteor build",
+    "deploy": "npm-run-all build:* meteor:build"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "bcrypt": "^1.0.3",
-    "meteor-node-stubs": "~0.2.4"
+    "bootstrap": "^4.0.0-beta.2",
+    "meteor-node-stubs": "~0.2.4",
+    "node-sass": "^4.6.0"
+  },
+  "devDependencies": {
+    "autoprefixer": "^7.1.6",
+    "nodemon": "^1.12.1",
+    "npm-run-all": "^4.1.2",
+    "postcss-cli": "^4.1.1"
   }
 }
