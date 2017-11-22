@@ -5,8 +5,7 @@
     "start": "npm-run-all build:* --parallel watch:* meteor",
     "meteor": "meteor run",
     "test": "meteor test-app --driver-package practicalmeteor:mocha",
-    "build:css":
-      "node-sass --include-path node_modules ./client/main.scss | postcss --local-plugins --use autoprefixer --output ./client/bundle.css",
+    "build:css": "node-sass --include-path node_modules ./client/main.scss | postcss --local-plugins --use autoprefixer --output ./client/bundle.css",
     "watch:css": "nodemon -w client -e scss -x npm run build:css",
     "meteor:build": "meteor build",
     "deploy": "npm-run-all build:* meteor:build"
@@ -16,7 +15,9 @@
     "bcrypt": "^1.0.3",
     "bootstrap": "^4.0.0-beta.2",
     "meteor-node-stubs": "~0.2.4",
-    "node-sass": "^4.6.0"
+    "node-sass": "^4.6.0",
+    "popper.js": "^1.12.9",
+    "tether": "^1.4.2"
   },
   "devDependencies": {
     "autoprefixer": "^7.1.6",
