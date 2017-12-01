@@ -2,6 +2,7 @@ import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 
 Template.signUp.events({
   'submit form': (e) => {
+    e.preventDefault();
     Accounts.createUser({
       email: e.target.email.value,
       password: e.target.password.value,
