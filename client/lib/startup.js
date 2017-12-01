@@ -1,12 +1,7 @@
 Meteor.startup(() => {
   configureSAlert();
-  testAlert();
 });
 
-
-function testAlert() {
-  sAlert.warning('Please register');
-}
 
 function configureSAlert() {
   sAlert.config({

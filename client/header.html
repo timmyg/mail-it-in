@@ -15,7 +15,11 @@
       </ul>
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
-          <a class="nav-link" href="/sign-in">Sign In</a>
+          {{ #if currentUser }}
+            Welcome, {{ currentUser.profile.name }}
+          {{ else }}
+            <a class="nav-link" href="/sign-in">Sign In</a>
+          {{ /if }}
         </li>
       </ul>
     </div>
