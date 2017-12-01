@@ -22,3 +22,7 @@ accounts-ui@1.2.0
 accounts-password@1.5.0
 ostrio:flow-router-extra
 kadira:blaze-layout
+juliancwirko:s-alert
+juliancwirko:s-alert-scale
+juliancwirko:s-alert-jelly
+juliancwirko:s-alert-flip
