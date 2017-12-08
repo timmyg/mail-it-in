@@ -1,6 +1,6 @@
 <template name="header">
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="#">
+    <a class="navbar-brand {{isActiveRoute 'home'}}" href="/">
       <img src="https://v4-alpha.getbootstrap.com/assets/brand/bootstrap-solid.svg" width="30" height="30" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,7 +18,11 @@
           {{ #if currentUser }}
             Welcome, {{ currentUser.profile.name }} <a href="/sign-out">Sign Out</a>
           {{ else }}
-            <a href="/sign-in">Sign In</a>
+            <!-- {{ #if isActiveRoute 'signIn' }} -->
+              <a href="/sign-up">Register</a>
+            <!-- {{ else }} -->
+              <a href="/sign-in">Sign In</a>
+            <!-- {{ /if }} -->
           {{ /if }}
         </li>
       </ul>
