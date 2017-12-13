@@ -9,8 +9,8 @@ Template.resetPassword.events({
           console.error(error);
           return sAlert.error(`Something went wrong: ${error.reason}`);
         }
-        Router.go("/sign-in");
-       return sAlert.success('Password successfully changed');
+        FlowRouter.go("/");
+        return sAlert.success('Password successfully changed');
     });
   }
 });

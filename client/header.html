@@ -16,13 +16,14 @@
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
           {{ #if currentUser }}
-            Welcome, {{ currentUser.profile.name }} <a href="/sign-out">Sign Out</a>
+            <i class="ion-home"></i>
+            <a href="/sign-out">Sign Out</a>
           {{ else }}
-            <!-- {{ #if isActiveRoute 'signIn' }} -->
+            {{ #if isActiveRoute 'signIn' }}
               <a href="/sign-up">Register</a>
-            <!-- {{ else }} -->
+            {{ else }}
               <a href="/sign-in">Sign In</a>
-            <!-- {{ /if }} -->
+            {{ /if }}
           {{ /if }}
         </li>
       </ul>
