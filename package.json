@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "npm-run-all build:* --parallel watch:* meteor",
-    "meteor": "meteor run",
+    "meteor": "meteor run --settings settings.json",
     "test": "meteor test-app --driver-package practicalmeteor:mocha",
     "build:css": "node-sass --include-path node_modules ./client/main.scss --output ./client/bundle.css",
     "watch:css": "nodemon -w client -e scss -x npm run build:css",

@@ -2,7 +2,6 @@ Meteor.startup(() => {
   configureSAlert();
 });
 
-
 function configureSAlert() {
   sAlert.config({
     effect: 'jelly',

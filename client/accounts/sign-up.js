@@ -10,6 +10,11 @@ Template.signUp.events({
         name: e.target.name.value
       }
     }, (error) => {
+      if (error) {
+        console.error(error)
+        return sAlert.error(error.reason);
+      }
+      analytics.alias(Meteor.userId());
       FlowRouter.go('/app');
     });
   }
