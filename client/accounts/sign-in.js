@@ -14,7 +14,7 @@ Template.signIn.events({
         Meteor.call("loggedIn");
         // clear alerts like incorrect password
         sAlert.closeAll();
-        FlowRouter.go('/app');
+        FlowRouter.go('/hello');
       })
     },
 });

@@ -15,7 +15,7 @@ Template.signUp.events({
         return sAlert.error(error.reason);
       }
       analytics.alias(Meteor.userId());
-      FlowRouter.go('/app');
+      FlowRouter.go('/hello');
     });
   }
 });

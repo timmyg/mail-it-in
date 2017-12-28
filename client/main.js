@@ -1,14 +1,10 @@
 import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 
-Template.post.onCreated(function() {
-  var self = this;
-  self.autorun(function() {
-    self.subscribe("post", FlowRouter.getParam("slug"));
-  });
-});
+FlowRouter.wait();
 
-Template.post.helpers({
-  post: function() {
-    return Posts.findOne({ slug: FlowRouter.getParam("slug") });
+Tracker.autorun(() => {
+  // wait on roles to intialise so we can check is use is in proper role
+  if (Roles.subscription.ready() && !FlowRouter._initialized) {
+    FlowRouter.initialize()
   }
 });

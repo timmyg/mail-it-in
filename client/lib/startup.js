@@ -1,5 +1,6 @@
 Meteor.startup(() => {
   configureSAlert();
+  configureStripe();
 });
 
 function configureSAlert() {
@@ -13,4 +14,8 @@ function configureSAlert() {
     offset: 0,
     beep: false,
   });
+}
+
+function configureStripe() {
+  Stripe.setPublishableKey(Meteor.settings.public.stripe.publishableKey);
 }
