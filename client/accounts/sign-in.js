@@ -8,6 +8,8 @@ Template.signIn.events({
           console.error(error)
           return sAlert.error('User/password incorrect');
         }
+        // clear alerts like incorrect password
+        sAlert.closeAll();
         FlowRouter.go('/app');
       })
     },
