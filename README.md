@@ -1,3 +1,6 @@
+## Lean, Mean Meteor Boilerplate
+![](http://res.cloudinary.com/dcdth9fpg/image/upload/v1514491986/pexels-photo-378308_1_qwsttp.jpg)
+
 ## Basic Overview
 
 A basic meteor boilerplate that uses common technologies for fast-paced, lean development including:
