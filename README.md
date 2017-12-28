@@ -27,7 +27,7 @@ npm start
 
 #### Initialize Analytics
 If you want to use Segment for analytics and tracking, do the following:
-* Go to [Segment](segment.com), create an account, and copy your "Write Key"
+* Go to [Segment](segment.com), create an account, and copy your *Write Key*
 * Create a settings.json in the root of this project like so:
 ```
 {
