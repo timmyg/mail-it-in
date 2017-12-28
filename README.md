@@ -27,7 +27,7 @@ npm start
 
 #### Initialize Analytics
 If you want to use Segment for analytics and tracking, do the following:
-* Go to [Segment](segment.com), create an account, and get a "Write Key"
+* Go to [Segment](segment.com), create an account, and copy your "Write Key"
 * Create a settings.json in the root of this project like so:
 ```
 {
@@ -47,7 +47,7 @@ You can use Material design icons by simply writing the following html:
 ```
 	<i class="mdi mdi-face mdi-24px"></i>
 ```
-and a face icon will appear.
+
 > Note: mdi-24px is not required, but is a consistent way to size icons differently, see [here](https://materialdesignicons.com/getting-started). You can also color, rotate, and do other fancy things with just class names.
 
 If you want to use a different icon library, feel free to do so. For example, if you would prefer to use [ionicons](http://ionicons.com/), do the following:
