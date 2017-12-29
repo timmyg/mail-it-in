@@ -1,42 +1,58 @@
 <template name="billing">
-  <button class="btn btn-primary" data-toggle="modal" data-target="#addCreditCard">Add Card</button>
-  {{> addCreditCardTemplate}}
+  <div>
+    <div class="clearfix">
+      <h3 class="float-left">My Cards</h3>
+      <button class="btn btn-primary float-right" data-toggle="modal" data-target="#add-credit-card">Add Card</button>
+    </div>
+    <div class="clearfix">
+      <ul class="list-unstyled">
+        {{#each myCards}}
+          <li>
+            {{> card}}
+          </li>
+        {{/each}}
+      </ul>
+    </div>
+  </div>
+  {{> addCreditCard}}
 </template>
 
+<template name="card">
+  <img src="{{getCreditCardImage}}" alt="">
+  {{card.last4}}
+</template>
 
-
-<template name="addCreditCardTemplate">
-  <div class="modal fade" id="addCreditCard">
+<template name="addCreditCard">
+  <div class="modal fade" id="add-credit-card">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
-        <div class="modal-header">
-          <h4 class="modal-title">Add Credit Card</h4>
-        </div>
-        <div class="modal-body">
-          <form>
+        <form>
+          <div class="modal-header">
+            <h4 class="modal-title">Add Credit Card</h4>
+          </div>
+          <div class="modal-body">
             <div class="form-group">
               <!-- <label class="col-form-label" for="cc-number">Credit Card Number</label> -->
-              <input type="number" class="form-control" id="cc-number" placeholder="Number">
+              <input type="number" class="form-control" id="cc-number" placeholder="Number" required>
             </div>
             <div class="form-group">
               <!-- <label class="col-form-label" for="cc-code">CVC</label> -->
-              <input type="number" class="form-control" id="cc-code" placeholder="CVC">
+              <input type="number" class="form-control" id="cc-code" placeholder="CVC" required>
             </div>
             <div class="form-group">
               <!-- <label class="col-form-label" for="cc-month">Month</label> -->
-              <input type="number" class="form-control" id="cc-month" placeholder="Month">
+              <input type="number" class="form-control" id="cc-month" placeholder="Month" required>
             </div>
             <div class="form-group">
               <!-- <label class="col-form-label" for="cc-year">Year</label> -->
-              <input type="number" class="form-control" id="cc-year" placeholder="Year">
+              <input type="number" class="form-control" id="cc-year" placeholder="Year" required>
             </div>
-          </form>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
-          <button type="submit" class="btn btn-primary btn-block">Add Card</button>
-        </div>
-
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-block">Add Card</button>
+          </div>
+        </form>
       </div>
     </div>
   </div>
