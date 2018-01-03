@@ -3,16 +3,25 @@ Template.addCreditCard.events({
     console.log("submit");
 
     e.preventDefault();
-    Stripe.card.createToken({
-     number: $('#cc-number').val(),
-     cvc: $('#cc-code').val(),
-     exp_month: $('#cc-month').val(),
-     exp_year: $('#cc-year').val(),
-    }, function(status, response) {
+    const card = {
+      number: $('#cc-number').val(),
+      cvc: $('#cc-code').val(),
+      exp_month: $('#cc-month').val(),
+      exp_year: $('#cc-year').val(),
+    };
+    const source = {
+      owner: {
+        email: Meteor.user().emails[0].address
+      }
+    };
+    Stripe.createSource(card, source, function(status, response) {
       if (response.error) {
         return sAlert.error(response.error.message);
       }
+      // Meteor.call("addToStripeCustomer");
       stripeToken = response.id;
+      console.log("response", response);
+
       let c = Cards.insert({
         userId: Meteor.userId(),
         card: response.card
@@ -22,13 +31,19 @@ Template.addCreditCard.events({
       $('#add-credit-card input').val('');
       return sAlert.success("Card successfully added");
     });
+  },
+});
+
+Template.card.events({
+  "click .delete-card": function(e, t) {
+    const card = Template.instance().data;
+    console.log("delete", card, Stripe.card);
+    Meteor.call("deleteCard", card._id)
   }
 });
 
 Template.card.helpers({
   getCreditCardImage: () => {
-    console.log(this);
-    console.log();
     switch (Template.instance().data.card.brand) {
       case "Visa":
         return "/img/cc/visa.png";
