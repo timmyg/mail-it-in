@@ -17,5 +17,9 @@ function configureSAlert() {
 }
 
 function configureStripe() {
-  Stripe.setPublishableKey(Meteor.settings.public.stripe.publishableKey);
+  //
+  // console.log("s", s.source);
+  // console.log("cs", s.createSource);
+  // console.log("cs2", s.createSource2);
+
 }

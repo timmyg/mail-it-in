@@ -1,0 +1,68 @@
+<template name="addCreditCardModal">
+  <div class="modal fade" id="add-credit-card">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <!--
+        <form>
+          <div class="modal-header">
+            <h4 class="modal-title">Add Credit Card</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <input type="number" class="form-control" id="cc-number" placeholder="Number" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" id="cc-code" placeholder="CVC" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" id="cc-month" placeholder="Month" required>
+            </div>
+            <div class="form-group">
+              <input type="number" class="form-control" id="cc-year" placeholder="Year" required>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-block">Add Card</button>
+          </div>
+        </form>
+        -->
+        <form>
+          <div class="modal-header">
+            <h4 class="modal-title">Add Credit Card</h4>
+          </div>
+          <div class="modal-body">
+            <div class="form-row">
+              <div class="form-group w-100">
+                <div id="card-number-element" class="form-control">
+                  <!-- a Stripe Element will be inserted here. -->
+                </div>
+              </div>
+              <div class="form-group w-50">
+                <div id="card-expiry-element" class="form-control">
+                  <!-- a Stripe Element will be inserted here. -->
+                </div>
+              </div>
+              <div class="form-group w-50">
+                <div id="card-cvc-element" class="form-control">
+                  <!-- a Stripe Element will be inserted here. -->
+                </div>
+              </div>
+              {{#if areErrors}}
+                <div class="alert alert-danger w-100" role="alert">
+                  <div>{{errors.cardNumber}}</div>
+                  <div>{{errors.cardExpiry}}</div>
+                  <div>{{errors.cardCvc}}</div>
+                </div>
+              {{/if}}
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-block">Add Card</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</template>
