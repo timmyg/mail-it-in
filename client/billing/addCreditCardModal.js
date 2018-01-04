@@ -85,7 +85,7 @@ function createStripeWidget(t) {
       stripe.createSource(cardNumberElement, source).then(function(response) {
           console.log(response);
           if (response.error && response.error.message){
-            // return sAlert.error(response.error.message);
+            // these are already shown on the form
           } else {
             console.log("response", response);
             let sourceData = response.source;
