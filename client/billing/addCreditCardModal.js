@@ -1,5 +1,5 @@
 let stripe;
-let cardNumberElement, cardExpiryElement, cardCvcElement;
+let cardElement;
 
 Template.addCreditCardModal.onRendered(function(){
   createStripeWidget(Template.instance());
@@ -7,21 +7,13 @@ Template.addCreditCardModal.onRendered(function(){
 
 Template.addCreditCardModal.onCreated(function(){
   configureStripe();
-  this.errors = new ReactiveVar({
-    cardNumber: null,
-    cardCvc: null,
-    cardExpiry: null,
-  });
+  this.error = new ReactiveVar();
 });
 
 Template.addCreditCardModal.helpers({
-  errors: function(){
-    return Template.instance().errors.get();
+  error: function(){
+    return Template.instance().error.get();
   },
-  areErrors: function() {
-    const e = Template.instance().errors.get()
-    return e.cardNumber || e.cardCvc || e.cardExpiry;
-  }
 });
 
 function configureStripe() {
@@ -30,49 +22,34 @@ function configureStripe() {
 
 function createStripeWidget(t) {
   let elements = stripe.elements();
-  let style = {};
+  let style = {
+    base: {
+      // color: '#32325d',
+      lineHeight: '18px',
+      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+      fontSmoothing: 'antialiased',
+      fontSize: '16px',
+      '::placeholder': {
+        color: '#aab7c4'
+      }
+    },
+    // invalid: {
+    //   color: '#fa755a',
+    //   iconColor: '#fa755a'
+    // }
+  };
 
-  const fieldCardNumber = "cardNumber";
-  cardNumberElement = elements.create(fieldCardNumber, {style: style});
-  cardNumberElement.mount('#card-number-element');
-  cardNumberElement.addEventListener('change', function(e) {
-    let errors = t.errors.get();
+  // const fieldCardNumber = "cardNumber";
+  cardElement = elements.create("card", {style: style});
+  cardElement.mount('#card-element');
+  cardElement.addEventListener('change', function(e) {
     if (e.error) {
-      errors[fieldCardNumber] = e.error.message;
-      t.errors.set(errors);
+      t.error.set(e.error.message);
     } else {
-      errors[fieldCardNumber] = null;
-      t.errors.set(errors);
+      t.error.set(null);
     }
   });
 
-  const fieldCardExpiry = "cardExpiry";
-  cardExpiryElement = elements.create(fieldCardExpiry, {style: style});
-  cardExpiryElement.mount('#card-expiry-element');
-  cardExpiryElement.addEventListener('change', function(e) {
-    let errors = t.errors.get();
-    if (e.error) {
-      errors[fieldCardExpiry] = e.error.message;
-      t.errors.set(errors);
-    } else {
-      errors[fieldCardExpiry] = null;
-      t.errors.set(errors);
-    }
-  });
-
-  const fieldCardCvc = "cardCvc";
-  cardCvcElement = elements.create(fieldCardCvc, {style: style});
-  cardCvcElement.mount('#card-cvc-element');
-  cardCvcElement.addEventListener('change', function(e) {
-    let errors = t.errors.get();
-    if (e.error) {
-      errors[fieldCardCvc] = e.error.message;
-      t.errors.set(errors);
-    } else {
-      errors[fieldCardCvc] = null;
-      t.errors.set(errors);
-    }
-  });
 
   // Submit
   $('form').on('submit', function(e){
@@ -82,7 +59,7 @@ function createStripeWidget(t) {
           email: Meteor.user().emails[0].address
         }
       };
-      stripe.createSource(cardNumberElement, source).then(function(response) {
+      stripe.createSource(cardElement, source).then(function(response) {
           console.log(response);
           if (response.error && response.error.message){
             // these are already shown on the form
@@ -104,7 +81,5 @@ function createStripeWidget(t) {
 }
 
 function clearForm() {
-  cardNumberElement.clear();
-  cardExpiryElement.clear();
-  cardCvcElement.clear();
+  cardElement.clear();
 }
