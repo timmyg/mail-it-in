@@ -1,5 +1,5 @@
 Meteor.publish('my.cards', function() {
-  return Cards.find({
+  return Sources.find({
     userId: this.userId
   });
 });

@@ -1,4 +1,5 @@
 let stripe;
+let cardNumberElement, cardExpiryElement, cardCvcElement;
 
 Template.addCreditCardModal.onRendered(function(){
   createStripeWidget(Template.instance());
@@ -23,49 +24,6 @@ Template.addCreditCardModal.helpers({
   }
 });
 
-Template.addCreditCardModal.events({
-  "submit form": function(e, t) {
-    // configureStripe();
-    console.log("submit");
-
-    e.preventDefault();
-    const card = {
-      number: $('#cc-number').val(),
-      cvc: $('#cc-code').val(),
-      exp_month: $('#cc-month').val(),
-      exp_year: $('#cc-year').val(),
-    };
-    const source = {
-      owner: {
-        email: Meteor.user().emails[0].address
-      }
-    };
-    console.log(card, source);
-
-    stripe.createSource(card, source, function(status, response) {
-      console.log("status", status);
-      console.log("response", response);
-
-      if (response.error) {
-        return sAlert.error(response.error.message);
-      }
-      // Meteor.call("addToStripeCustomer");
-      stripeToken = response.id;
-      let c = Cards.insert({
-        userId: Meteor.userId(),
-        card: response.card
-      });
-      // TODO clear modal
-      $('#add-credit-card').modal('hide');
-      $('#add-credit-card input').val('');
-      return sAlert.success("Card successfully added");
-    });
-  },
-  // "change #card-number-element": function(e, t) {
-  //   console.log("change");
-  // }
-});
-
 function configureStripe() {
   stripe = Stripe(Meteor.settings.public.stripe.publishableKey);
 }
@@ -75,9 +33,9 @@ function createStripeWidget(t) {
   let style = {};
 
   const fieldCardNumber = "cardNumber";
-  let cardNumber = elements.create(fieldCardNumber, {style: style});
-  cardNumber.mount('#card-number-element');
-  cardNumber.addEventListener('change', function(e) {
+  cardNumberElement = elements.create(fieldCardNumber, {style: style});
+  cardNumberElement.mount('#card-number-element');
+  cardNumberElement.addEventListener('change', function(e) {
     let errors = t.errors.get();
     if (e.error) {
       errors[fieldCardNumber] = e.error.message;
@@ -89,9 +47,9 @@ function createStripeWidget(t) {
   });
 
   const fieldCardExpiry = "cardExpiry";
-  let cardExpiry = elements.create(fieldCardExpiry, {style: style});
-  cardExpiry.mount('#card-expiry-element');
-  cardExpiry.addEventListener('change', function(e) {
+  cardExpiryElement = elements.create(fieldCardExpiry, {style: style});
+  cardExpiryElement.mount('#card-expiry-element');
+  cardExpiryElement.addEventListener('change', function(e) {
     let errors = t.errors.get();
     if (e.error) {
       errors[fieldCardExpiry] = e.error.message;
@@ -103,9 +61,9 @@ function createStripeWidget(t) {
   });
 
   const fieldCardCvc = "cardCvc";
-  let cardCvc = elements.create(fieldCardCvc, {style: style});
-  cardCvc.mount('#card-cvc-element');
-  cardCvc.addEventListener('change', function(e) {
+  cardCvcElement = elements.create(fieldCardCvc, {style: style});
+  cardCvcElement.mount('#card-cvc-element');
+  cardCvcElement.addEventListener('change', function(e) {
     let errors = t.errors.get();
     if (e.error) {
       errors[fieldCardCvc] = e.error.message;
@@ -115,4 +73,38 @@ function createStripeWidget(t) {
       t.errors.set(errors);
     }
   });
+
+  // Submit
+  $('form').on('submit', function(e){
+      e.preventDefault();
+      const source = {
+        owner: {
+          email: Meteor.user().emails[0].address
+        }
+      };
+      stripe.createSource(cardNumberElement, source).then(function(response) {
+          console.log(response);
+          if (response.error && response.error.message){
+            // return sAlert.error(response.error.message);
+          } else {
+            console.log("response", response);
+            let sourceData = response.source;
+            sourceData.userId = Meteor.userId();
+            let c = Sources.insert(sourceData);
+            // TODO clear modal
+            $('#add-credit-card').modal('hide');
+            clearForm();
+            Meteor.call("addSourceToStripeCustomer", response.source.id, (error, result) => {
+              return sAlert.success("Card successfully added");
+            });
+          }
+      });
+  });
+
+}
+
+function clearForm() {
+  cardNumberElement.clear();
+  cardExpiryElement.clear();
+  cardCvcElement.clear();
 }

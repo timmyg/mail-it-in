@@ -1,17 +1,20 @@
 <template name="billing">
   <div>
-    billing
     <div class="clearfix">
       <h3 class="float-left">My Cards</h3>
       <button class="btn btn-primary float-right" data-toggle="modal" data-target="#add-credit-card">Add Card</button>
     </div>
     <div class="clearfix">
       <ul class="list-unstyled">
-        {{#each myCards}}
-          <li>
-            {{> card}}
-          </li>
-        {{/each}}
+        {{#if mySources}}
+          {{#each mySources}}
+            <li>
+              {{> source}}
+            </li>
+          {{/each}}
+        {{else}}
+          No cards on your account
+        {{/if}}
       </ul>
     </div>
   </div>
@@ -19,8 +22,8 @@
   {{> addCreditCardModal}}
 </template>
 
-<template name="card">
+<template name="source">
   <img src="{{getCreditCardImage}}" alt="">
   ****-{{card.last4}}
-  <i class="mdi mdi-delete delete-card"></i>
+  <i class="mdi mdi-delete delete-source"></i>
 </template>

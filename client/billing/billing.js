@@ -1,13 +1,12 @@
 
-Template.card.events({
-  "click .delete-card": function(e, t) {
-    const card = Template.instance().data;
-    console.log("delete", card, Stripe.card);
-    Meteor.call("deleteCard", card._id)
+Template.source.events({
+  "click .delete-source": function(e, t) {
+    const source = Template.instance().data;
+    Meteor.call("deleteCard", source._id)
   }
 });
 
-Template.card.helpers({
+Template.source.helpers({
   getCreditCardImage: () => {
     switch (Template.instance().data.card.brand) {
       case "Visa":
@@ -23,7 +22,7 @@ Template.card.helpers({
 });
 
 Template.billing.helpers({
-  myCards: () => {
-    return Cards.find().fetch();
+  mySources: () => {
+    return Sources.find().fetch();
   },
 });

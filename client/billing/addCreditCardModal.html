@@ -49,10 +49,18 @@
                 </div>
               </div>
               {{#if areErrors}}
-                <div class="alert alert-danger w-100" role="alert">
-                  <div>{{errors.cardNumber}}</div>
-                  <div>{{errors.cardExpiry}}</div>
-                  <div>{{errors.cardCvc}}</div>
+                <div class="alert alert-danger w-100 small m-0" role="alert">
+                  <ul class="m-0 pl-4">
+                    {{#if errors.cardNumber}}
+                      <li>{{errors.cardNumber}}</li>
+                    {{/if}}
+                    {{#if errors.cardExpiry}}
+                      <li>{{errors.cardExpiry}}</li>
+                    {{/if}}
+                    {{#if errors.cardCvc}}
+                      <li>{{errors.cardCvc}}</li>
+                    {{/if}}
+                  </ul>
                 </div>
               {{/if}}
             </div>
