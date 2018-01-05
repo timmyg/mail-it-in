@@ -9,31 +9,20 @@
           <div class="modal-body">
             <div class="form-row">
               <div class="form-group w-100">
-                <div id="card-element" class="form-control">
+                <div id="card-element" class="form-control field is-empty">
                   <!-- a Stripe Element will be inserted here. -->
                 </div>
               </div>
               {{#if error}}
                 <div class="alert alert-danger w-100 small m-0" role="alert">
                   {{error}}
-                  <!-- <ul class="m-0 pl-4">
-                    {{#if errors.cardNumber}}
-                      <li>{{errors.cardNumber}}</li>
-                    {{/if}}
-                    {{#if errors.cardExpiry}}
-                      <li>{{errors.cardExpiry}}</li>
-                    {{/if}}
-                    {{#if errors.cardCvc}}
-                      <li>{{errors.cardCvc}}</li>
-                    {{/if}}
-                  </ul> -->
                 </div>
               {{/if}}
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default btn-block" data-dismiss="modal">Cancel</button>
-            <button type="submit" class="btn btn-primary btn-block">Add Card</button>
+            <button type="button" class="btn btn-default btn-block cancel">Cancel</button>
+            <button type="submit" class="btn btn-primary btn-block" disabled={{isPending}}>Add Card</button>
           </div>
         </form>
       </div>

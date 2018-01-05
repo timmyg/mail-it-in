@@ -1,4 +1,5 @@
 var Stripe = StripeAPI(Meteor.settings.private.stripe.secretKey);
+const deleteSeconds = 10;
 
 Meteor.methods({
   loggedIn() {
@@ -23,23 +24,40 @@ Meteor.methods({
     }
   },
   deleteCard(sourceId) {
+    const userId = Meteor.userId();
+    const stripeCustomer = Meteor.user().stripeCustomer;
     const source = Sources.findOne({
       _id: sourceId,
-      userId: Meteor.userId()
+      userId: userId
     })
-    Stripe.customers.deleteSource(
-      Meteor.user().stripeCustomer,
-      source.id
-    );
-    Sources.remove(source._id);
+    const source3 = Sources.update(source._id, {
+      $set: {
+        pendingDelete: true
+      }
+    });
+    Meteor.setTimeout(() => {
+      // get source again to make sure it should still be deleted
+      const updatedSource = Sources.findOne(sourceId);
+      if (updatedSource.pendingDelete) {
+        Stripe.customers.deleteSource(stripeCustomer, source.id);
+        Sources.remove(source._id);
+      }
+    }, deleteSeconds * 1000);
   },
-  chargeCard(card) {
-    // Stripe.charges.create({
-    //   amount: 1000,
-    //   currency: 'usd',
-    //   source: stripeToken
-    // }, function(err, charge) {
-    //   console.log(err, charge);
-    // });
+  undoDeleteCard(sourceId) {
+    Sources.update(sourceId, {
+      $unset: {
+        pendingDelete: ""
+      }
+    });
   }
+  // chargeCard(card) {
+  //   // Stripe.charges.create({
+  //   //   amount: 1000,
+  //   //   currency: 'usd',
+  //   //   source: stripeToken
+  //   // }, function(err, charge) {
+  //   //   console.log(err, charge);
+  //   // });
+  // }
 });

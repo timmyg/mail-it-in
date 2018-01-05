@@ -1,29 +1,69 @@
 <template name="billing">
-  <div>
-    <div class="clearfix">
-      <h3 class="float-left">My Cards</h3>
-      <button class="btn btn-primary float-right" data-toggle="modal" data-target="#add-credit-card">Add Card</button>
-    </div>
-    <div class="clearfix">
-      <ul class="list-unstyled">
-        {{#if mySources}}
-          {{#each mySources}}
-            <li>
-              {{> source}}
-            </li>
-          {{/each}}
-        {{else}}
-          No cards on your account
-        {{/if}}
-      </ul>
+  <div class="col-md-6 col-xs-12 mx-auto">
+    <div class="card">
+      <div class="card-body">
+        <h5 class="card-title">Payment</h5>
+        <div class="clearfix">
+          <ul class="list-unstyled">
+            {{#if mySources}}
+              {{#each mySources}}
+                <li>
+                  {{> source}}
+                </li>
+              {{/each}}
+            {{else}}
+              No cards on your account
+            {{/if}}
+          </ul>
+          <a data-toggle="modal" data-target="#add-credit-card" href="">Add Card</a>
+        </div>
+      </div>
     </div>
   </div>
-
   {{> addCreditCardModal}}
 </template>
 
 <template name="source">
-  <img src="{{getCreditCardImage}}" alt="">
-  ****-{{card.last4}}
-  <i class="mdi mdi-delete delete-source"></i>
+  {{#if pendingDelete}}
+    <a class="undo-delete-souce" href="">Undo</a>
+  {{else}}
+    <img src="{{getCreditCardImage}}" alt="" class="logo">
+    {{#if isAmex}}
+      <span>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        &nbsp;
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        &nbsp;
+        <i class="mdi mdi-asterisk"></i>
+        {{card.last4}}
+      </span>
+    {{else}}
+      <span><i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        &nbsp;
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        &nbsp;
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        <i class="mdi mdi-asterisk"></i>
+        &nbsp;
+        {{card.last4}}</span>
+    {{/if}}
+    <i class="mdi mdi-delete text-secondary delete-source"></i>
+  {{/if}}
 </template>

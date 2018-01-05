@@ -1,6 +1,13 @@
 let stripe;
 let cardElement;
 
+Template.addCreditCardModal.events({
+  "click .cancel": function(event, template){
+     $('#add-credit-card').modal('hide');
+     clearForm();
+  }
+});
+
 Template.addCreditCardModal.onRendered(function(){
   createStripeWidget(Template.instance());
 })
@@ -22,25 +29,34 @@ function configureStripe() {
 
 function createStripeWidget(t) {
   let elements = stripe.elements();
-  let style = {
-    base: {
-      // color: '#32325d',
-      lineHeight: '18px',
-      fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-      fontSmoothing: 'antialiased',
-      fontSize: '16px',
-      '::placeholder': {
-        color: '#aab7c4'
+  let styles = {
+    iconStyle: 'solid',
+    style: {
+      base: {
+        iconColor: '#8898AA',
+        // color: 'white',
+        lineHeight: '36px',
+        fontWeight: 300,
+        fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
+        fontSize: '18px',
+
+        '::placeholder': {
+          color: '#8898AA',
+        },
+      },
+      invalid: {
+        iconColor: '#e85746',
+        color: '#e85746',
       }
     },
-    // invalid: {
-    //   color: '#fa755a',
-    //   iconColor: '#fa755a'
-    // }
+    // classes: {
+    //   focus: 'is-focused',
+    //   empty: 'is-empty',
+    // },
   };
 
   // const fieldCardNumber = "cardNumber";
-  cardElement = elements.create("card", {style: style});
+  cardElement = elements.create("card", styles);
   cardElement.mount('#card-element');
   cardElement.addEventListener('change', function(e) {
     if (e.error) {
@@ -50,27 +66,27 @@ function createStripeWidget(t) {
     }
   });
 
-
   // Submit
   $('form').on('submit', function(e){
       e.preventDefault();
+      $("button[type=submit]").prop('disabled', true);
       const source = {
         owner: {
           email: Meteor.user().emails[0].address
         }
       };
       stripe.createSource(cardElement, source).then(function(response) {
-          console.log(response);
           if (response.error && response.error.message){
             // these are already shown on the form
+            $("button[type=submit]").prop('disabled', false);
           } else {
-            console.log("response", response);
             let sourceData = response.source;
             sourceData.userId = Meteor.userId();
             let c = Sources.insert(sourceData);
             // TODO clear modal
             $('#add-credit-card').modal('hide');
             clearForm();
+            $("button[type=submit]").prop('disabled', false);
             Meteor.call("addSourceToStripeCustomer", response.source.id, (error, result) => {
               return sAlert.success("Card successfully added");
             });
