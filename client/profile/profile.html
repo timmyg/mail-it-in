@@ -1,0 +1,11 @@
+<template name="profile">
+  <div class="row">
+    <form class="col-md-6 offset-md-3 col-xs-12">
+      <div class="form-group">
+        <label class="col-form-label" for="name">Name</label>
+        <input type="text" class="form-control" id="name" placeholder="Name" value="{{currentUser.profile.name}}">
+      </div>
+      <button type="submit" class="btn btn-success float-right">Save</button>
+    </form>
+  </div>
+</template>
