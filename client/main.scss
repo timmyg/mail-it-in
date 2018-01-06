@@ -2,7 +2,9 @@
 
 $enable-rounded: true;
 $link-hover-decoration: none;
-// $icon-font-path: 'ionicons/dist/fonts'; 
+// $icon-font-path: 'ionicons/dist/fonts';
 // @import "ionicons/dist/scss/ionicons";
 @import "bootstrap/scss/bootstrap";
+@import "billing/billing.scss";
 @import "_global";
+ 
