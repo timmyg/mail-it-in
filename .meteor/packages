@@ -28,3 +28,4 @@ percolatestudio:segment.io@=2.0.0_1
 alanning:roles
 ongoworks:security
 djbelieny:stripe
+standard-minifier-css
