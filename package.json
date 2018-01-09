@@ -2,14 +2,9 @@
   "name": "meteor-boilerplate",
   "private": true,
   "scripts": {
-    "start": "npm-run-all build:* --parallel watch:* meteor",
+    "start": "npm run meteor",
     "meteor": "meteor run --settings settings.json",
-    "test": "meteor test-app --driver-package practicalmeteor:mocha",
-    "heroku-postbuild": "npm run deploy",
-    "build:css": "node-sass --include-path node_modules ./client/main.scss --output ./client/bundle.css",
-    "watch:css": "nodemon -w client -e scss -x npm run build:css",
-    "meteor:build": "meteor build .",
-    "deploy": "npm-run-all build:* meteor:build"
+    "test": "meteor test-app --driver-package practicalmeteor:mocha"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
