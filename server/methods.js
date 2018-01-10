@@ -50,14 +50,17 @@ Meteor.methods({
         pendingDelete: ""
       }
     });
-  }
-  // chargeCard(card) {
-  //   // Stripe.charges.create({
-  //   //   amount: 1000,
-  //   //   currency: 'usd',
-  //   //   source: stripeToken
-  //   // }, function(err, charge) {
-  //   //   console.log(err, charge);
-  //   // });
-  // }
+  },
+  setDefaultCard(sourceId) {
+    Sources.update({userId: Meteor.userId()}, {
+      $set: {
+        default: false
+      }
+    }, {multi: true});
+    Sources.update(sourceId, {
+      $set: {
+        default: true
+      }
+    });
+  },
 });

@@ -1,52 +1,26 @@
 <template name="billing">
-  <div class="billing col-md-6 col-xs-12 mx-auto">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">My Credit Cards</h5>
-        <div class="clearfix">
-          <ul class="list-unstyled">
-            {{#if mySources}}
-              {{#each mySources}}
-                <li>
-                  {{> source}}
-                </li>
-              {{/each}}
-            {{else}}
-              No cards on your account
-            {{/if}}
-          </ul>
-          <a data-toggle="modal" data-target="#add-credit-card" href="" class="float-right">Add Card</a>
+  {{#if ready}}
+    <div class="billing col-md-6 col-xs-12 mx-auto">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">My Credit Cards</h5>
+          <div class="clearfix">
+            <ul class="list-unstyled">
+              {{#if mySources}}
+                {{#each mySources}}
+                  <li>
+                    {{> source}}
+                  </li>
+                {{/each}}
+              {{else}}
+                No cards on your account
+              {{/if}}
+            </ul>
+            <a data-toggle="modal" data-target="#add-credit-card" href="" class="float-right">Add Card</a>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  {{> addCreditCardModal}}
-</template>
-
-<template name="source">
-  <div class="text-center mt-4">
-    {{#if pendingDelete}}
-      <a class="undo-delete-souce" href="">Undo</a>
-    {{else}}
-    <div class="row">
-      <div class="col">
-        <img src="{{getCreditCardImage}}" alt="" class="logo">
-      </div>
-      <div class="col-8">
-        <span>
-          <i class="mdi mdi-asterisk"></i>
-          <i class="mdi mdi-asterisk"></i>
-          <i class="mdi mdi-asterisk"></i>
-          <i class="mdi mdi-asterisk"></i>
-        </span>
-        <span class="display display-4 ml-1">
-          {{card.last4}}
-        </span>
-      </div>
-      <div class="col">
-        <i class="mdi mdi-delete text-secondary delete-source float-right"></i>
-      </div>
-    </div>
-    {{/if}}
-  </div>
+    {{> addCreditCardModal}}
+  {{/if}}
 </template>

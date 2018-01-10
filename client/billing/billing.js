@@ -1,34 +1,7 @@
-
-Template.source.events({
-  "click .delete-source": function(e, t) {
-    const source = Template.instance().data;
-    Meteor.call("deleteCard", source._id)
-  },
-  "click .undo-delete-souce": function(e, t) {
-    const source = Template.instance().data;
-    Meteor.call("undoDeleteCard", source._id)
-  }
-});
-
-Template.source.helpers({
-  isAmex: () => {
-    return Template.instance().data.card.brand === "American Express"
-  },
-  getCreditCardImage: () => {
-    switch (Template.instance().data.card.brand) {
-      case "Visa":
-        return "/img/cc/visa.png";
-      case "American Express":
-        return "/img/cc/americanexpress.png";
-      case "MasterCard":
-        return "/img/cc/mastercard.png";
-      case "Discover":
-        return "/img/cc/discover.png";
-    }
-  }
-});
+import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 
 Template.billing.helpers({
+  ready: () => FlowRouter.subsReady(),
   mySources: () => {
     return Sources.find().fetch();
   },

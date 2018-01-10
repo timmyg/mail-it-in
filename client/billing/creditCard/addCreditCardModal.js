@@ -82,6 +82,8 @@ function createStripeWidget(t) {
           } else {
             let sourceData = response.source;
             sourceData.userId = Meteor.userId();
+            // set as default source if first source
+            sourceData.default = Sources.find().fetch().length == 0;
             let c = Sources.insert(sourceData);
             // TODO clear modal
             $('#add-credit-card').modal('hide');

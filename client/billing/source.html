@@ -1,0 +1,40 @@
+<template name="source">
+  <div class="source text-center mt-4">
+    {{#if pendingDelete}}
+      Card removed. <a class="undo-delete-souce" href="">Undo</a>
+    {{else}}
+    <div class="row">
+      <div class="col">
+        <img src="{{getCreditCardImage}}" alt="" class="logo">
+      </div>
+      <div class="col-8">
+        <span>
+          <i class="mdi mdi-asterisk asterisk"></i>
+          <i class="mdi mdi-asterisk asterisk"></i>
+          <i class="mdi mdi-asterisk asterisk"></i>
+          <i class="mdi mdi-asterisk asterisk"></i>
+        </span>
+        <span class="display display-4 ml-1">
+          {{card.last4}}
+        </span>
+        {{#if default}}
+          <span class="badge badge-secondary default">Default</span>
+        {{/if}}
+      </div>
+      <div class="col">
+        <div class="dropdown pointer">
+          <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <i class="mdi mdi-chevron-down mdi-24px"></i>
+          </a>
+          <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item delete-source" href="">Remove</a>
+            {{#unless default}}
+              <a class="dropdown-item set-default" href="">Set as Default</a>
+            {{/unless}}
+          </div>
+        </div>
+      </div>
+    </div>
+    {{/if}}
+  </div>
+</template>

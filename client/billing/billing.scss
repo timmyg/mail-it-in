@@ -1,9 +1,15 @@
 .billing {
   .logo {
     height: 40px;
+    margin-top: -5px;
   }
 
   .display {
     font-size: 1.5rem;
   }
+
+  .asterisk {
+    vertical-align: text-bottom;
+  }
+
 }
