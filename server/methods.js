@@ -30,7 +30,7 @@ Meteor.methods({
       _id: sourceId,
       userId: userId
     })
-    const source3 = Sources.update(source._id, {
+    Sources.update(source._id, {
       $set: {
         pendingDelete: true
       }

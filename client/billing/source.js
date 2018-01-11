@@ -18,10 +18,10 @@ Template.source.events({
 
 Template.source.helpers({
   isAmex: () => {
-    return Template.instance().data.card.brand === "American Express"
+    return Template.instance().data.details.card.brand === "American Express"
   },
   getCreditCardImage: () => {
-    switch (Template.instance().data.card.brand) {
+    switch (Template.instance().data.details.card.brand) {
       case "Visa":
         return "/img/cc/visa.png";
       case "American Express":

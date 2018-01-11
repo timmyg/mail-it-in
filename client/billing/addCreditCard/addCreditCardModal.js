@@ -75,16 +75,21 @@ function createStripeWidget(t) {
           email: Meteor.user().emails[0].address
         }
       };
+
       stripe.createSource(cardElement, source).then(function(response) {
           if (response.error && response.error.message){
             // these are already shown on the form
             $("button[type=submit]").prop('disabled', false);
           } else {
-            let sourceData = response.source;
-            sourceData.userId = Meteor.userId();
-            // set as default source if first source
-            sourceData.default = Sources.find().fetch().length == 0;
+            let sourceData = {
+              userId: Meteor.userId(),
+              default: Sources.find().fetch().length == 0,
+              details: response.source,
+            };
+            console.log("sourceData", sourceData, sourceData.details);
             let c = Sources.insert(sourceData);
+            console.log("c", c);
+
             // TODO clear modal
             $('#add-credit-card').modal('hide');
             clearForm();
