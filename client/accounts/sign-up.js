@@ -16,6 +16,12 @@ Template.signUp.events({
       }
       analytics.alias(Meteor.userId());
       FlowRouter.go('/hello');
+      Meteor.call( 'sendVerificationLink', (e, r) => {
+        if (e) {
+          return sAlert.error(error.reason)
+        }
+        return sAlert.success("Please check your email to confirm your account")
+      });
     });
   }
 });
