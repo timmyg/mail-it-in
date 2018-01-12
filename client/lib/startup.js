@@ -10,7 +10,7 @@ function importWebfonts() {
   WebFont.load({
     google: {
       families: [
-        'Joti One:regular',
+        'Kaushan Script:regular',
       ],
     },
   });
