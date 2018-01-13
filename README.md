@@ -13,6 +13,7 @@ A basic meteor boilerplate that uses common technologies for fast-paced, lean de
 * [S-alert](http://s-alert.meteorapp.com/) for clean, sexy alerts
 * [Stripe](http://stripe.com/) for credit card processing, using the new v3 Elements
 * [Web Font Loader](https://github.com/typekit/webfontloader) for easily loading web fonts
+* [Meteor Migrations](https://github.com/percolatestudio/meteor-migrations) loading data into your database
 
 ## Development
 
