@@ -31,3 +31,4 @@ djbelieny:stripe
 standard-minifier-css
 fourseven:scss
 aldeed:collection2-core
+percolate:migrations
