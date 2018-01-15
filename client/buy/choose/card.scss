@@ -1,0 +1,12 @@
+@import "{}/node_modules/bootstrap/scss/functions";
+@import "{}/node_modules/bootstrap/scss/variables";
+
+.card-wrapper {
+  border: 1px solid transparent;
+  &.selected {
+    border-color: $primary;
+  }
+  img {
+    width: 100px;
+  }
+}
