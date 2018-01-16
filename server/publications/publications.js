@@ -26,6 +26,5 @@ Meteor.publish("order.mine", function() {
 
 Meteor.publish("order.cards", function(argument) {
   const order = Orders.findOne({ userId: this.userId });
-  console.log("order", order.items);
   return Cards.find({ _id: { $in: order.items } });
 });
