@@ -89,12 +89,6 @@ function createStripeWidget(t) {
         };
 
         let newSource = Sources.insert(sourceData);
-        console.log(
-          "FlowRouter.current().route.name",
-          FlowRouter.current().route.name,
-          newSource
-        );
-
         if (FlowRouter.current().route.name === "checkout") {
           Meteor.call("orders.mine.source.set", newSource);
         }
