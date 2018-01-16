@@ -1,5 +1,6 @@
 Template.checkout.helpers({
   cart: () => {
-    return Session.get(Sesh.CART);
-  }
+    return Session.get(CONSTANTS.CART);
+  },
+  cards: () => Cards.find().fetch()
 });

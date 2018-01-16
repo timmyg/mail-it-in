@@ -2,19 +2,20 @@ var Stripe = StripeAPI(Meteor.settings.private.stripe.secretKey);
 const deleteSeconds = 10;
 
 Meteor.methods({
-  loggedIn() {
-    console.log("logged in");
-  },
+  loggedIn() {},
   async addSourceToStripeCustomer(sourceToken) {
     if (Meteor.user().stripeCustomer) {
       // add to existing in stripe
-      let result = await Stripe.customers.createSource(Meteor.user().stripeCustomer, {
-        source: sourceToken,
-      });
+      let result = await Stripe.customers.createSource(
+        Meteor.user().stripeCustomer,
+        {
+          source: sourceToken
+        }
+      );
     } else {
       const customer = await Stripe.customers.create({
-        email:  Meteor.user().emails[0].address,
-        source: sourceToken,
+        email: Meteor.user().emails[0].address,
+        source: sourceToken
       });
       Meteor.users.update(Meteor.userId(), {
         $set: {
@@ -29,7 +30,7 @@ Meteor.methods({
     const source = Sources.findOne({
       _id: sourceId,
       userId: userId
-    })
+    });
     Sources.update(source._id, {
       $set: {
         pendingDelete: true
@@ -52,11 +53,15 @@ Meteor.methods({
     });
   },
   setDefaultCard(sourceId) {
-    Sources.update({userId: Meteor.userId()}, {
-      $set: {
-        default: false
-      }
-    }, {multi: true});
+    Sources.update(
+      { userId: Meteor.userId() },
+      {
+        $set: {
+          default: false
+        }
+      },
+      { multi: true }
+    );
     Sources.update(sourceId, {
       $set: {
         default: true
@@ -65,8 +70,19 @@ Meteor.methods({
   },
   sendVerificationLink() {
     const userId = Meteor.userId();
-    if ( userId ) {
-      return Accounts.sendVerificationEmail( userId );
+    if (userId) {
+      return Accounts.sendVerificationEmail(userId);
     }
+  },
+  resetSelectedCards() {
+    Sources.update(
+      { userId: Meteor.userId() },
+      {
+        $unset: {
+          selected: ""
+        }
+      },
+      { multi: true }
+    );
   }
 });

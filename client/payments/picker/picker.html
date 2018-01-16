@@ -1,0 +1,26 @@
+<template name="paymentPicker">
+  <div class="dropdown payment-picker">
+    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{#if selectedPayment}}
+        {{> payment selectedPayment}}
+      {{else}}
+        Select Payment
+      {{/if}}
+    </button>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+      {{#each sources}}
+        <a class="dropdown-item">
+          {{> payment}}
+        </a>
+      {{/each}}
+      <a class="dropdown-item" data-toggle="modal" data-target="#add-credit-card">
+        Add new card
+      </a>
+    </div>
+  </div>
+</template>
+
+<template name="payment">
+  <img src="{{getCreditCardImage(details.card.brand)}}" alt="" class="logo">
+  <span>{{details.card.last4}}</span>
+</template>

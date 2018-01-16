@@ -1,3 +1,11 @@
 <template name="checkout">
-  checkout {{cart.items.length}}
+  <section class="checkout">
+    checkout {{cart.items.length}}
+    <br>
+    {{#each cards}}
+      <img src="{{link}}" alt="" class="entity">
+    {{/each}}
+    <br>
+    {{ > paymentPicker}}
+  </section>
 </template>

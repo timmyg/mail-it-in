@@ -1,26 +1,27 @@
+import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 let stripe;
 let cardElement;
 
 Template.addCreditCardModal.events({
-  "click .cancel": function(event, template){
-     $('#add-credit-card').modal('hide');
-     clearForm();
+  "click .cancel": function(event, template) {
+    $("#add-credit-card").modal("hide");
+    clearForm();
   }
 });
 
-Template.addCreditCardModal.onRendered(function(){
+Template.addCreditCardModal.onRendered(function() {
   createStripeWidget(Template.instance());
-})
+});
 
-Template.addCreditCardModal.onCreated(function(){
+Template.addCreditCardModal.onCreated(function() {
   configureStripe();
   this.error = new ReactiveVar();
 });
 
 Template.addCreditCardModal.helpers({
-  error: function(){
+  error: function() {
     return Template.instance().error.get();
-  },
+  }
 });
 
 function configureStripe() {
@@ -30,25 +31,25 @@ function configureStripe() {
 function createStripeWidget(t) {
   let elements = stripe.elements();
   let styles = {
-    iconStyle: 'solid',
+    iconStyle: "solid",
     style: {
       base: {
-        iconColor: '#8898AA',
+        iconColor: "#8898AA",
         // color: 'white',
-        lineHeight: '36px',
+        lineHeight: "36px",
         fontWeight: 300,
         fontFamily: '"Helvetica Neue", Helvetica, sans-serif',
-        fontSize: '18px',
+        fontSize: "18px",
 
-        '::placeholder': {
-          color: '#8898AA',
-        },
+        "::placeholder": {
+          color: "#8898AA"
+        }
       },
       invalid: {
-        iconColor: '#e85746',
-        color: '#e85746',
+        iconColor: "#e85746",
+        color: "#e85746"
       }
-    },
+    }
     // classes: {
     //   focus: 'is-focused',
     //   empty: 'is-empty',
@@ -57,8 +58,8 @@ function createStripeWidget(t) {
 
   // const fieldCardNumber = "cardNumber";
   cardElement = elements.create("card", styles);
-  cardElement.mount('#card-element');
-  cardElement.addEventListener('change', function(e) {
+  cardElement.mount("#card-element");
+  cardElement.addEventListener("change", function(e) {
     if (e.error) {
       t.error.set(e.error.message);
     } else {
@@ -67,40 +68,46 @@ function createStripeWidget(t) {
   });
 
   // Submit
-  $('form').on('submit', function(e){
-      e.preventDefault();
-      $("button[type=submit]").prop('disabled', true);
-      const source = {
-        owner: {
-          email: Meteor.user().emails[0].address
+  $("form").on("submit", function(e) {
+    e.preventDefault();
+    $("button[type=submit]").prop("disabled", true);
+    const source = {
+      owner: {
+        email: Meteor.user().emails[0].address
+      }
+    };
+
+    stripe.createSource(cardElement, source).then(function(response) {
+      if (response.error && response.error.message) {
+        // these are already shown on the form
+        $("button[type=submit]").prop("disabled", false);
+      } else {
+        let sourceData = {
+          userId: Meteor.userId(),
+          default: Sources.find().fetch().length == 0,
+          details: response.source
+        };
+        if (FlowRouter.current().route.name === "checkout") {
+          Meteor.call("resetSelectedCards");
+          sourceData.selected = true;
         }
-      };
 
-      stripe.createSource(cardElement, source).then(function(response) {
-          if (response.error && response.error.message){
-            // these are already shown on the form
-            $("button[type=submit]").prop('disabled', false);
-          } else {
-            let sourceData = {
-              userId: Meteor.userId(),
-              default: Sources.find().fetch().length == 0,
-              details: response.source,
-            };
-            console.log("sourceData", sourceData, sourceData.details);
-            let c = Sources.insert(sourceData);
-            console.log("c", c);
+        let c = Sources.insert(sourceData);
 
-            // TODO clear modal
-            $('#add-credit-card').modal('hide');
-            clearForm();
-            $("button[type=submit]").prop('disabled', false);
-            Meteor.call("addSourceToStripeCustomer", response.source.id, (error, result) => {
-              return sAlert.success("Card successfully added");
-            });
+        // TODO clear modal
+        $("#add-credit-card").modal("hide");
+        clearForm();
+        $("button[type=submit]").prop("disabled", false);
+        Meteor.call(
+          "addSourceToStripeCustomer",
+          response.source.id,
+          (error, result) => {
+            return sAlert.success("Card successfully added");
           }
-      });
+        );
+      }
+    });
   });
-
 }
 
 function clearForm() {

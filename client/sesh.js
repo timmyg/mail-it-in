@@ -1,6 +1,10 @@
 Sesh = class Sesh {
-  CARDS = "buy.cards";
-  CART = "buy.cart";
+  // get CARDS() {
+  //   return "buy.cards";
+  // }
+  // static get CARDS() {
+  //   return "buy.cards";
+  // }
 
   static push(name, value) {
     if (Session.get(name)) {
@@ -27,7 +31,6 @@ Sesh = class Sesh {
     } else {
       this.remove(name, value);
     }
-    console.log(Session.get(name));
   }
 
   static contains(name, value) {
@@ -52,3 +55,5 @@ Sesh = class Sesh {
     return 0;
   }
 };
+
+export { Sesh };

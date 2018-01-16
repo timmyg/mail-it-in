@@ -3,12 +3,10 @@ Meteor.publish("packages.all", function() {
 });
 
 Meteor.publish("package", function(packageId) {
-  console.log("packageId", packageId);
-
   return Packages.find(packageId);
 });
 
-Meteor.publish("my.sources", function() {
+Meteor.publish("sources.mine", function() {
   return Sources.find({
     userId: this.userId
   });
@@ -16,4 +14,8 @@ Meteor.publish("my.sources", function() {
 
 Meteor.publish("cards.all", function() {
   return Cards.find();
+});
+
+Meteor.publish("cards.ids", function(cardIds) {
+  return Cards.find({ _id: { $in: cardIds } });
 });
