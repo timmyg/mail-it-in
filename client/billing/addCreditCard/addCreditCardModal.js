@@ -87,12 +87,17 @@ function createStripeWidget(t) {
           default: Sources.find().fetch().length == 0,
           details: response.source
         };
-        if (FlowRouter.current().route.name === "checkout") {
-          Meteor.call("resetSelectedCards");
-          sourceData.selected = true;
-        }
 
-        let c = Sources.insert(sourceData);
+        let newSource = Sources.insert(sourceData);
+        console.log(
+          "FlowRouter.current().route.name",
+          FlowRouter.current().route.name,
+          newSource
+        );
+
+        if (FlowRouter.current().route.name === "checkout") {
+          Meteor.call("orders.mine.source.set", newSource);
+        }
 
         // TODO clear modal
         $("#add-credit-card").modal("hide");

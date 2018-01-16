@@ -19,11 +19,12 @@ Template.choose.helpers({
     return Cards.find().fetch();
   },
   chooseText: () => {
-    if (Sesh.isEmpty(CONSTANTS.CARDS)) {
+    // if (Sesh.isEmpty(CONSTANTS.CARDS)) {
+    const order = Orders.findOne();
+    if (!order || order.items.length == 0) {
       return `choose ${Packages.findOne().cards} cards`;
-    } else if (Sesh.getLength(CONSTANTS.CARDS) > 0) {
-      const remainingCards =
-        Packages.findOne().cards - Sesh.getLength(CONSTANTS.CARDS);
+    } else if (order.items.length > 0) {
+      const remainingCards = Packages.findOne().cards - order.items.length;
       if (remainingCards) {
         let str = `choose ${remainingCards} more card`;
         if (remainingCards > 1) str += "s";
@@ -32,7 +33,8 @@ Template.choose.helpers({
     }
   },
   chooseMore: () => {
-    return Packages.findOne().cards - Sesh.getLength(CONSTANTS.CARDS) > 0;
+    const order = Orders.findOne();
+    return Packages.findOne().cards - order.items.length > 0;
   }
 });
 

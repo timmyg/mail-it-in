@@ -3,7 +3,6 @@ import WebFont from "webfontloader";
 Meteor.startup(() => {
   importWebfonts();
   configureSAlert();
-  configureStripe();
 });
 
 function importWebfonts() {

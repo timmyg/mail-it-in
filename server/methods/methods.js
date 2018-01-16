@@ -40,8 +40,21 @@ Meteor.methods({
       // get source again to make sure it should still be deleted
       const updatedSource = Sources.findOne(sourceId);
       if (updatedSource.pendingDelete) {
-        Stripe.customers.deleteSource(stripeCustomer, source.id);
-        Sources.remove(source._id);
+        Stripe.customers.deleteSource(stripeCustomer, source.details.id);
+        Sources.remove(sourceId);
+        // remove from order if existing
+        const order = Orders.findOne({ userId: userId });
+        if (order.source === sourceId) {
+          Orders.update(
+            order._id,
+            {
+              $unset: {
+                source: ""
+              }
+            },
+            { validate: false }
+          );
+        }
       }
     }, deleteSeconds * 1000);
   },
@@ -83,6 +96,25 @@ Meteor.methods({
         }
       },
       { multi: true }
+    );
+  },
+  setSelectedCards(id) {
+    Sources.update(
+      { userId: Meteor.userId() },
+      {
+        $unset: {
+          selected: ""
+        }
+      },
+      { multi: true }
+    );
+    Sources.update(
+      { userId: Meteor.userId(), _id: id },
+      {
+        $set: {
+          selected: true
+        }
+      }
     );
   }
 });

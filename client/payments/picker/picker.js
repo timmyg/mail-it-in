@@ -1,14 +1,22 @@
+import { FlowRouter } from "meteor/ostrio:flow-router-extra";
+
 Template.paymentPicker.onCreated(function() {
   this.subscribe("sources.mine");
 });
 
 Template.paymentPicker.helpers({
-  sources: function() {
-    return Sources.find().fetch();
+  ready: () => FlowRouter.subsReady(),
+  unusedSources: function() {
+    const order = Orders.findOne();
+    return Sources.find({ _id: { $ne: order.source } }).fetch();
   },
   selectedPayment: () => {
-    return Sources.find({ selected: true }).fetch();
-  },
+    const order = Orders.findOne();
+    return Sources.findOne(order.source);
+  }
+});
+
+Template.payment.helpers({
   getCreditCardImage: brand => {
     switch (brand) {
       case "Visa":
@@ -20,5 +28,11 @@ Template.paymentPicker.helpers({
       case "Discover":
         return "/img/cc/discover.png";
     }
+  }
+});
+
+Template.payment.events({
+  "click .item": function(e, t) {
+    Meteor.call("orders.mine.source.set", t.data._id);
   }
 });
