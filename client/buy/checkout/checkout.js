@@ -1,8 +1,8 @@
 Template.checkout.helpers({
-  cart: () => {
-    return Session.get(CONSTANTS.CART);
-  },
-  cards: () => Cards.find().fetch()
+  // cart: () => {
+  //   return Session.get(CONSTANTS.CART);
+  // },
+  cards: () => Items.find().fetch()
 });
 
 Template.checkout.events({
