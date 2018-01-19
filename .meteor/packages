@@ -34,3 +34,5 @@ aldeed:collection2-core
 percolate:migrations
 session
 u2622:persistent-session
+aldeed:autoform
+check

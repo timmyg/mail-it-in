@@ -1,6 +1,24 @@
 <template name="packages">
-  {{#each packages}}
-    <a href="/buy/{{_id}}">buy {{cards}} for ${{price}}</a>
-    <br>
-  {{/each}}
+  <header class="text-center">
+    Choose a package
+    <subheader>
+      Here is a reason you should choose a package
+    </subheader>
+  </header>
+  <div class="row">
+    {{#each packages}}
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title d-inline">Purchase {{cards}} cards for ${{price}}</h5>
+          {{#if best}}
+            <span class="badge badge-success float-right">Best Value</span>
+        {{/if}}
+          <p class="card-text mt-2">With supporting text below as a natural lead-in to additional content.</p>
+          <a href="/buy/{{_id}}" class="btn btn-primary">Choose</a>
+        </div>
+      </div>
+    </div>
+    {{/each}}
+  </div>
 </template>

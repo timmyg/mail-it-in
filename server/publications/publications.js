@@ -1,5 +1,5 @@
 Meteor.publish("packages.all", function() {
-  return Packages.find();
+  return Packages.find({}, { sort: { sort: 1 } });
 });
 
 Meteor.publish("package", function(packageId) {

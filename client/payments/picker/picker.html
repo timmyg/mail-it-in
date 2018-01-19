@@ -2,20 +2,20 @@
   {{#if ready}}
   <span>Payment:</span>
   <div class="dropdown payment-picker">
-    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{#if selectedPayment}}
         {{> payment selectedPayment}}
       {{else}}
         Select Payment
       {{/if}}
-    </button>
+    </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
       {{#each unusedSources}}
         <a class="dropdown-item">
           {{> payment}}
         </a>
+        <div class="dropdown-divider"></div>
       {{/each}}
-      <div class="dropdown-divider"></div>
       <a class="dropdown-item" data-toggle="modal" data-target="#add-credit-card">
         Add new card
       </a>

@@ -2,8 +2,8 @@ Meteor.startup(() => {
   Migrations.add({
     version: 1,
     up: function() {
-      Packages.insert({ price: 20, cards: 5 });
-      Packages.insert({ price: 10, cards: 2 });
+      Packages.insert({ price: 10, cards: 2, sort: 10 });
+      Packages.insert({ price: 20, cards: 5, best: true, sort: 20 });
     }
   });
 

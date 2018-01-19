@@ -1,3 +1,6 @@
+@import "{}/node_modules/bootstrap/scss/functions";
+@import "{}/node_modules/bootstrap/scss/variables";
+
 .pointer {
   cursor: pointer;
 }
@@ -17,4 +20,19 @@
 
 .hover-opacity:hover {
   opacity: 0.6;
+}
+
+header {
+  margin-top: 50px;
+  margin-bottom: 50px;
+  font-size: 2.5rem;
+  font-weight: 300;
+  line-height: 1.2;
+  display: block;
+  subheader {
+    margin-top: 10px;
+    font-size: 1.5rem;
+    color: $text-muted;
+    display: block;
+  }
 }

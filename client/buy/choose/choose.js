@@ -38,8 +38,7 @@ Template.choose.helpers({
   }
 });
 
-// Template.choose.onCreated(function() {
-//   const package = FlowRouter.current().params.resetToken;
-//   this.subscribe("package", package);
-//   this.subscribe("cards.all", package);
-// });
+Template.choose.onCreated(function() {
+  console.log(FlowRouter.current().params.package);
+  Meteor.call("orders.mine.new", FlowRouter.current().params.package);
+});
