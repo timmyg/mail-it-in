@@ -70,6 +70,7 @@ function createStripeWidget(t) {
   // Submit
   $("form").on("submit", function(e) {
     e.preventDefault();
+    if(!Meteor.user()) return;
     $("button[type=submit]").prop("disabled", true);
     const source = {
       owner: {

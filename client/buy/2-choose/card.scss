@@ -1,12 +1,20 @@
 @import "{}/node_modules/bootstrap/scss/functions";
 @import "{}/node_modules/bootstrap/scss/variables";
 
-.card-wrapper {
+.card {
   border: 1px solid transparent;
   &.selected {
     border-color: $primary;
   }
-  img {
-    width: 100px;
+  .check {
+    position: absolute;
+    right: 5px;
+    top: 5px;
   }
+  // img {
+  //   width: 160px;
+  // }
+  // input::-webkit-calendar-picker-indicator {
+  //   display: none;
+  // }
 }

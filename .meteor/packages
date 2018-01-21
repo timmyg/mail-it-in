@@ -35,3 +35,4 @@ percolate:migrations
 session
 u2622:persistent-session
 check
+momentjs:moment
