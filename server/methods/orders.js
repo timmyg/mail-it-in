@@ -18,11 +18,14 @@ Meteor.methods({
     );
   },
   ["orders.mine.item.add"](orderId, itemId) {
-    OrderItems.insert({
-      order: orderId,
-      item: itemId,
-      userId: Meteor.userId()
-    }, { validate: false });
+    OrderItems.insert(
+      {
+        order: orderId,
+        item: itemId,
+        userId: Meteor.userId()
+      },
+      { validate: false }
+    );
   },
   ["orders.mine.item.remove"](orderId, itemId) {
     OrderItems.remove({
@@ -53,6 +56,19 @@ Meteor.methods({
       {
         $set: {
           source: sourceId
+        }
+      },
+      { validate: false }
+    );
+  },
+  ["orders.mine.date.set"]() {
+    Orders.update(
+      {
+        userId: Meteor.userId()
+      },
+      {
+        $set: {
+          date: new Date()
         }
       },
       { validate: false }
