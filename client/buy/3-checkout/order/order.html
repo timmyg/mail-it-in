@@ -1,0 +1,17 @@
+<template name="order">
+    <div class="card">
+        <div class="card-header">
+            Your Order
+        </div>
+        <div class="card-body">
+            {{#each cards}}
+                <img src="{{link}}" alt="" class="entity">
+            {{/each}}
+        </div>
+        <div class="card-footer bg-transparent border-top-0">
+            <strong>Total</strong>
+            <em>({{cards.length}} cards)</em>
+            <span class="float-right h4">${{myOrder.price}} </span>
+        </div>
+    </div>
+</template>

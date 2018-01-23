@@ -32,7 +32,7 @@ Template.payment.helpers({
 });
 
 Template.payment.events({
-  "click .item": function(e, t) {
+  "click a": function(e, t) {
     Meteor.call("orders.mine.source.set", t.data._id);
   }
 });

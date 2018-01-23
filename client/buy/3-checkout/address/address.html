@@ -1,24 +1,24 @@
 <template name="checkoutAddress">
-  <div class="row">
-    <form class="col-md-6 offset-md-3 col-xs-12">
-      <div class="form-group">
-        <label class="col-form-label" for="address">Address</label>
-        <input type="string" class="form-control" id="address" data-field="shippingAddress.address" value="{{shippingAddress.address}}" placeholder="Address">
+  <form>
+    <div class="form-group">
+      <label class="col-form-label" for="address">Address</label>
+      <input type="string" class="form-control" id="address" data-field="shippingAddress.address" value="{{shippingAddress.address}}"
+        placeholder="241 Magic Kingdom Way">
+    </div>
+    <div class="form-row">
+      <div class="form-group col-md-6">
+        <label class="col-form-label" for="city">City</label>
+        <input type="string" class="form-control" id="city" data-field="shippingAddress.city" value="{{shippingAddress.city}}" placeholder="Orlando">
       </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <label class="col-form-label" for="city">City</label>
-          <input type="string" class="form-control" id="city" data-field="shippingAddress.city" value="{{shippingAddress.city}}" placeholder="City">
-        </div>
-        <div class="form-group col-md-2">
-          <label class="col-form-label" for="state">State</label>
-          <input type="string" class="form-control" id="state" data-field="shippingAddress.state" value="{{shippingAddress.state}}" placeholder="State">
-        </div>
-        <div class="form-group col-md-4">
-          <label class="col-form-label" for="zip">Zip</label>
-          <input type="number" class="form-control" id="zip" data-field="shippingAddress.zip" value="{{shippingAddress.zip}}" placeholder="Zip">
-        </div>
+      <div class="form-group col-md-2">
+        <label class="col-form-label" for="state">State</label>
+        <input type="string" class="form-control text-uppercase" id="state" maxlength="2" data-field="shippingAddress.state" value="{{shippingAddress.state}}"
+          placeholder="FL">
       </div>
-    </form>
-  </div>
+      <div class="form-group col-md-4">
+        <label class="col-form-label" for="zip">Zip</label>
+        <input type="number" class="form-control" id="zip" data-field="shippingAddress.zip" value="{{shippingAddress.zip}}" placeholder="32830">
+      </div>
+    </div>
+  </form>
 </template>

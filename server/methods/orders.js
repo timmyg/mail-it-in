@@ -1,5 +1,4 @@
-import { log } from "util";
-import { loadavg } from "os";
+const Stripe = StripeAPI(Meteor.settings.private.stripe.secretKey);
 
 Meteor.methods({
   ["orders.mine.new"](packageId) {
@@ -92,5 +91,23 @@ Meteor.methods({
     };
     console.log(query, update);
     OrderItems.update(query, update);
+  },
+  ["order.checkout"](orderId) {
+    const order = Orders.findOne(orderId);
+    AddressesSchema.validate(order.shippingAddress);
+    OrdersSchema.validate(order);
+    const source = Sources.findOne(order.source);
+    Stripe.charges.create(
+      {
+        amount: order.price * 100,
+        currency: "usd",
+        source: source.details.id,
+        description: `Mail it In (order ${orderId})`,
+        customer: Meteor.user().stripeCustomer
+      },
+      function(err, charge) {
+        console.log(err, charge);
+      }
+    );
   }
 });

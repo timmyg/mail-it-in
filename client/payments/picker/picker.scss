@@ -4,4 +4,10 @@
       height: 30px;
     }
   }
+  .dropdown-toggle {
+    .dropdown-item {
+      display: inline;
+      padding-left: 0;
+    }
+  }
 }
