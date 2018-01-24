@@ -18,6 +18,9 @@ Meteor.publish("items.all", function() {
 
 Meteor.publish("order.building", function() {
   const order = Orders.findOne({ userId: this.userId, status: "building" });
+  if (!order) {
+    return this.ready();
+  }
   return [Orders.find({ _id: order._id, userId: this.userId }), OrderItems.find({ order: order._id, userId: this.userId })];
 });
 

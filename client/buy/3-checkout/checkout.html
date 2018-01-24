@@ -1,39 +1,41 @@
 <template name="checkout">
-  <section class="checkout">
-    <header class="text-center">
-      Checkout
-    </header>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <section class="mb-3">
-          <div class="card">
-            <div class="card-header">
-              Payment
+  {{#if ready}}
+    <section class="checkout">
+      <header class="text-center">
+        Checkout
+      </header>
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+          <section class="mb-3">
+            <div class="card">
+              <div class="card-header">
+                Payment
+              </div>
+              <div class="card-body">
+                {{ > paymentPicker}}
+              </div>
             </div>
-            <div class="card-body">
-              {{ > paymentPicker}}
+          </section>
+          <section>
+            <div class="card">
+              <div class="card-header">
+                Shipping Address
+              </div>
+              <div class="card-body">
+                {{ > checkoutAddress myOrder}}
+              </div>
             </div>
-          </div>
-        </section>
-        <section>
-          <div class="card">
-            <div class="card-header">
-              Shipping Address
-            </div>
-            <div class="card-body">
-              {{ > checkoutAddress myOrder}}
-            </div>
-          </div>
-        </section>
+          </section>
+        </div>
+        <div class="col-xs-12 col-md-6">
+          {{> checkoutOrder myOrder}}
+        </div>
       </div>
-      <div class="col-xs-12 col-md-6">
-        {{> order myOrder}}
+      <div class="row mt-3 mb-3">
+        <div class="col">
+          <button class="btn btn-success btn-lg float-right complete">Buy</button>
+        </div>
       </div>
-    </div>
-    <div class="row mt-3 mb-3">
-      <div class="col">
-        <button class="btn btn-success btn-lg float-right complete">Buy</button>
-      </div>
-    </div>
-  </section>
+    </section>
+  {{/if}}
 </template>
