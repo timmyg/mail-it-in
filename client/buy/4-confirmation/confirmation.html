@@ -1,10 +1,16 @@
 <template name="confirmation">
-    <header>
-        <subheader>Thanks for your order!</subheader>
-        <subheader>We'll ship your pre-stamped cards to you before your event dates!</subheader>
-    </header>
-    <section>
-        <a href="/orders" class="btn btn-outline-secondary">My Orders</a>
-        <a href="/buy" class="btn btn-outline-success">Order more Cards</a>
-    </section>
+    <div class="text-center">
+        <header>
+            <subheader>Thanks for your order!</subheader>
+        </header>
+        <p>We'll ship your pre-stamped cards to you before your event dates!</p>
+        <section>
+            <div class="row d-flex justify-content-center">
+                <a href="/buy" class="btn btn-outline-success">Order more Cards</a>
+            </div>
+            <div class="row d-flex justify-content-center mt-2">
+                <a href="/orders" class="btn btn-outline-primary">My Orders</a>
+            </div>
+        </section>
+    </div>
 </template>

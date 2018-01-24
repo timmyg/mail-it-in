@@ -36,3 +36,4 @@ session
 u2622:persistent-session
 check
 momentjs:moment
+lbee:moment-helpers

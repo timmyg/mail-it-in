@@ -22,12 +22,11 @@ Template.checkout.events({
       }
     }
     // call backend to charge card via stripe, update paid=true
-    console.log("looks good!");
     Meteor.call("order.checkout", Orders.findOne()._id, (e, r) => {
       if (e) {
-        return sAlert.error("Something went wrong")
+        return sAlert.error("Something went wrong");
       }
-      FlowRouter.go('confirmation');
+      FlowRouter.go("confirmation");
     });
   }
 });

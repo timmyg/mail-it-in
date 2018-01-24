@@ -3,7 +3,8 @@
     <a class="navbar-brand {{isActiveRoute 'home'}}" href="/">
       <span class="text-primary fancy-font">MailItIn</span>
     </a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+      aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
@@ -16,30 +17,29 @@
       <ul class="navbar-nav my-2 my-lg-0">
         <li class="nav-item">
           {{ #if currentUser }}
-            <div class="dropdown pointer">
-              <!-- <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
-              <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <i class="mdi mdi-face mdi-24px mdi-light"></i>
-                <i class="mdi mdi-chevron-down mdi-24px mdi-light"></i>
-                <!-- Dropdown button -->
-              </a>
-              <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
-                <a class="dropdown-item" href="/profile">Profile</a>
-                <a class="dropdown-item" href="/billing">Billing</a>
-                {{#if isInRole 'admin'}}
+          <div class="dropdown pointer">
+            <!-- <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> -->
+            <a class="" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <i class="mdi mdi-face mdi-24px mdi-light"></i>
+              <i class="mdi mdi-chevron-down mdi-24px mdi-light"></i>
+              <!-- Dropdown button -->
+            </a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenuButton">
+              <a class="dropdown-item" href="/profile">Profile</a>
+              <a class="dropdown-item" href="/billing">Payments</a>
+              <a class="dropdown-item" href="/orders">Orders</a>
+              {{#if isInRole 'admin'}}
                 <a class="dropdown-item" href="/admin/hello">Admin</a>
-                {{/if}}
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="/sign-out">Sign Out</a>
-              </div>
+              {{/if}}
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="/sign-out">Sign Out</a>
             </div>
+          </div>
+          {{ else }} {{ #if isActiveRoute 'signIn' }}
+          <a href="/sign-up">Register</a>
           {{ else }}
-            {{ #if isActiveRoute 'signIn' }}
-              <a href="/sign-up">Register</a>
-            {{ else }}
-              <a href="/sign-in">Sign In</a>
-            {{ /if }}
-          {{ /if }}
+          <a href="/sign-in">Sign In</a>
+          {{ /if }} {{ /if }}
         </li>
       </ul>
     </div>

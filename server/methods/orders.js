@@ -2,15 +2,15 @@ const Stripe = StripeAPI(Meteor.settings.private.stripe.secretKey);
 
 Meteor.methods({
   ["orders.mine.new"](packageId) {
-    const package = Packages.findOne(packageId);
+    // const package = Packages.findOne(packageId);
     Orders.upsert(
       {
-        userId: Meteor.userId()
+        userId: Meteor.userId(),
+        status: "building"
       },
       {
         $set: {
-          package: packageId,
-          price: package.price
+          package: packageId
         }
       },
       { validate: false }
@@ -34,10 +34,10 @@ Meteor.methods({
     });
   },
   ["orders.mine.reset"]() {
-    console.log(Meteor.userId());
     Orders.upsert(
       {
-        userId: Meteor.userId()
+        userId: Meteor.userId(),
+        status: "building"
       },
       {
         $set: {
@@ -50,7 +50,8 @@ Meteor.methods({
   ["orders.mine.source.set"](sourceId) {
     Orders.update(
       {
-        userId: Meteor.userId()
+        userId: Meteor.userId(),
+        status: "building"
       },
       {
         $set: {
@@ -63,7 +64,8 @@ Meteor.methods({
   ["orders.mine.date.set"]() {
     Orders.update(
       {
-        userId: Meteor.userId()
+        userId: Meteor.userId(),
+        status: "building"
       },
       {
         $set: {
@@ -83,38 +85,34 @@ Meteor.methods({
       order: orderId,
       item: itemId,
       userId: Meteor.userId()
+      // status: "building"
     };
     const update = {
       $set: {
         eventDate: date
       }
     };
-    console.log(query, update);
     OrderItems.update(query, update);
   },
-  ["order.checkout"](orderId) {
+  async ["order.checkout"](orderId) {
     const order = Orders.findOne(orderId);
     AddressesSchema.validate(order.shippingAddress);
     OrdersSchema.validate(order);
     const source = Sources.findOne(order.source);
-    Stripe.charges.create(
-      {
-        amount: order.price * 100,
-        currency: "usd",
-        source: source.details.id,
-        description: `Mail it In (order ${orderId})`,
-        customer: Meteor.user().stripeCustomer
-      },
-      function(err, charge) {
-        // console.log(err, charge);
-        const update = {
-          status: "processing",
-          paid: true
-        };
-        Orders.update(orderId, update, err => {
-          if (err) console.error(err);
-        });
-      }
-    );
+    const package = Packages.findOne(order.package);
+    const charge = await Stripe.charges.create({
+      amount: package.price * 100,
+      currency: "usd",
+      source: source.details.id,
+      description: `Mail it In (order ${orderId})`,
+      customer: Meteor.user().stripeCustomer
+    });
+    const update = {
+      status: "processing",
+      paid: true
+    };
+    Orders.update(orderId, { $set: update }, err => {
+      if (err) console.error(err);
+    });
   }
 });

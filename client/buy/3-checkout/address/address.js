@@ -3,7 +3,6 @@ Template.checkoutAddress.events({
     const orderId = t.data._id;
     const field = $(e.currentTarget).data("field");
     const val = $(e.currentTarget).val();
-    // console.log(val);
     let update = {};
     if (val) {
       update["$set"] = {};
@@ -25,7 +24,6 @@ Template.checkoutAddress.events({
 
 // function validateAddress(t, field) {
 //   try {
-//     console.log(Template.instance().data.shippingAddress, Template.instance().data.shippingAddress);
 //     AddressesSchema.validate(Template.instance().data.shippingAddress, { keys: [field] });
 //     t.$(`#${field}`).removeClass("is-invalid");
 //   } catch (err) {

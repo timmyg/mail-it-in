@@ -3,23 +3,23 @@ import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 Template.choose.events({
   "click .next": (e, t) => {
     const orderItems = OrderItems.find().fetch();
-    let error;
-    orderItems.forEach(oi => {
+    const datesSet = orderItems.every(oi => {
       if (!oi.eventDate) {
-        error = true;
         sAlert.warning(`Please choose an event date for all cards`);
+        return false;
       }
+      return true;
     });
-    if (!error) FlowRouter.go("checkout");
+    if (datesSet) FlowRouter.go("checkout");
   }
 });
 
 Template.choose.helpers({
   ready: () => FlowRouter.subsReady(),
-  package: function () {
+  package: function() {
     return Packages.findOne();
   },
-  cardsByCategory: function () {
+  cardsByCategory: function() {
     const items = Items.find().fetch();
     return groupBy(items, "category");
   },
@@ -46,6 +46,6 @@ Template.choose.helpers({
   }
 });
 
-Template.choose.onCreated(function () {
+Template.choose.onCreated(function() {
   Meteor.call("orders.mine.new", FlowRouter.current().params.package);
 });

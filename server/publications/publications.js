@@ -1,30 +1,33 @@
-Meteor.publish("packages.all", function () {
+Meteor.publish("packages.all", function() {
   return Packages.find({}, { sort: { sort: 1 } });
 });
 
-Meteor.publish("package", function (packageId) {
+Meteor.publish("package", function(packageId) {
   return Packages.find(packageId);
 });
 
-Meteor.publish("sources.mine", function () {
+Meteor.publish("sources.mine", function() {
   return Sources.find({
     userId: this.userId
   });
 });
 
-Meteor.publish("items.all", function () {
+Meteor.publish("items.all", function() {
   return Items.find();
 });
 
-Meteor.publish("order.building", function () {
-  const order = Orders.findOne({ userId: this.userId });
-  return [
-    Orders.find({ _id: order._id, userId: this.userId }),
-    OrderItems.find({ order: order._id, userId: this.userId })
-  ]
+Meteor.publish("order.building", function() {
+  const order = Orders.findOne({ userId: this.userId, status: "building" });
+  return [Orders.find({ _id: order._id, userId: this.userId }), OrderItems.find({ order: order._id, userId: this.userId })];
 });
 
-Meteor.publish("orders.mine", function () {
+Meteor.publish("orders.complete.mine", function() {
+  const orders = Orders.find({
+    userId: this.userId,
+    status: {
+      $in: ["processing", "shipped"]
+    }
+  }).fetch();
   return Orders.find({
     userId: this.userId,
     status: {
@@ -33,12 +36,22 @@ Meteor.publish("orders.mine", function () {
   });
 });
 
-Meteor.publish("order.items", function () {
-  const orderItemIds = OrderItems.find({}).fetch().map(function (item) { return item.item; })
-  console.log(orderItemIds);
+Meteor.publish("order.building.items", function() {
+  const order = Orders.findOne({ userId: this.userId, status: "building" });
+  const orderItemIds = OrderItems.find({ order: order._id })
+    .fetch()
+    .map(function(item) {
+      return item.item;
+    });
+
   return Items.find({
     _id: {
       $in: orderItemIds
     }
   });
+});
+
+Meteor.publish("order.building.package", function() {
+  const order = Orders.findOne({ userId: this.userId, status: "building" });
+  return Packages.find(order.package);
 });
