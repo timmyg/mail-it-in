@@ -16,12 +16,21 @@ Meteor.publish("items.all", function () {
   return Items.find();
 });
 
-Meteor.publish("order.mine", function () {
+Meteor.publish("order.building", function () {
   const order = Orders.findOne({ userId: this.userId });
   return [
     Orders.find({ _id: order._id, userId: this.userId }),
     OrderItems.find({ order: order._id, userId: this.userId })
   ]
+});
+
+Meteor.publish("orders.mine", function () {
+  return Orders.find({
+    userId: this.userId,
+    status: {
+      $in: ["processing", "shipped"]
+    }
+  });
 });
 
 Meteor.publish("order.items", function () {

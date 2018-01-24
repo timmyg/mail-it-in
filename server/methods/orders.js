@@ -106,7 +106,14 @@ Meteor.methods({
         customer: Meteor.user().stripeCustomer
       },
       function(err, charge) {
-        console.log(err, charge);
+        // console.log(err, charge);
+        const update = {
+          status: "processing",
+          paid: true
+        };
+        Orders.update(orderId, update, err => {
+          if (err) console.error(err);
+        });
       }
     );
   }
