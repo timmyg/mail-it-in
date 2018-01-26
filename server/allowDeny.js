@@ -8,7 +8,8 @@ Sources.allow({
 
 Orders.allow({
   update: function(userId, doc, fields, modifier) {
-    if (userId && doc.userId === userId) {
+    console.log(Roles.userIsInRole(userId, ["admin"]));
+    if ((userId && doc.userId === userId) || Roles.userIsInRole(userId, ["admin"])) {
       return true;
     }
   }

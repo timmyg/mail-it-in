@@ -1,0 +1,32 @@
+<template name="adminOrders">
+    <table class="table">
+        <thead class="bg-primary">
+            <tr>
+                <th scope="col">Order Date</th>
+                <th scope="col">Order ID</th>
+                <th scope="col">Status</th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#if allOrders}}
+                {{#each allOrders}}
+                    {{> adminOrderRow this}}
+                {{/each}}
+            {{/if}}
+        </tbody>
+    </table>
+</template>
+
+<template name="adminOrderRow">
+    <tr>
+        <td>{{moFormat date 'M/DD/YYYY'}}</td>
+        <td>{{_id}}</td>
+        <td>{{status}}</td>
+        <td>
+            <a href="/admin/orders/{{_id}}">
+                <i class="mdi mdi-chevron-right"></i>
+            </a>
+        </td>
+    </tr>
+</template>

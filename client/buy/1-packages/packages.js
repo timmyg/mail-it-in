@@ -6,6 +6,6 @@ Template.packages.rendered = function() {
 
 Template.packages.helpers({
   packages: function() {
-    return Packages.find().fetch();
+    return Packages.find({}, { sort: { sort: 1 } }).fetch();
   }
 });

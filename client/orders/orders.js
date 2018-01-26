@@ -3,7 +3,7 @@ import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 Template.orders.helpers({
   ready: () => FlowRouter.subsReady(),
   myOrders: function() {
-    return Orders.find().fetch();
+    return Orders.find({}, { sort: { date: -1 } }).fetch();
   }
 });
 

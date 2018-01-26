@@ -1,0 +1,64 @@
+<template name="adminOrder">
+    <div class="admin-order">
+        <header class="text-center">
+            Order
+            <span class="text-muted">{{order._id}}</span>
+        </header>
+        <ul class="list-unstyled">
+            <li>
+                <strong># cards</strong>: {{orderItems.length}}</li>
+            <li>
+                <strong>address</strong>: {{order.getAddress}}</li>
+            <li>
+                <strong>status</strong>: {{order.status}}</li>
+            <li>
+                <strong>date</strong>: {{moFormat order.date 'M/DD/YYYY'}}</li>
+            <li>
+                <strong>user info</strong>: {{orderUser.profile.name}}</li>
+            <li>
+                <strong>items</strong>: {{orderItems.length}}</li>
+            <li>
+                <strong>paid</strong>:
+                {{#if order.paid}}
+                    <i class="mdi mdi-check-circle text-success"></i>
+                {{else}}
+                    <i class="mdi mdi-close-circle"></i>
+                {{/if}}
+            </li>
+            <li>
+                <strong>
+                    shipped</strong>:
+                {{#if order.shipped}}
+                    <i class="mdi mdi-check-circle text-success"></i>
+                    <!-- <button class="btn btn-sm btn-link text-danger not-shipped">Mark as Not Shipped</button> -->
+                {{else}}
+                    <i class="mdi mdi-close-circle"></i>
+                    <!-- <button class="btn btn-sm btn-link text-success shipped">Mark as Shipped</button> -->
+                {{/if}}
+                <div class="btn-group">
+                    <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        <i class="mdi mdi-dots-horizontal"></i>
+                    </a>
+                    <div class="dropdown-menu text-center">
+                        <small>
+                            {{#if order.shipped}}
+                                <a href="" class="text-danger not-shipped">Mark as Not Shipped</a>
+                            {{else}}
+                                <a href="" class="text-success shipped">Mark as Shipped</a>
+                            {{/if}}
+                        </small>
+                    </div>
+                </div>
+            </li>
+        </ul>
+        <div class="row text-center">
+            {{#each orderItems}}
+                {{> adminOrderItem}}
+            {{/each}}
+        </div>
+    </div>
+</template>
+
+<template name="adminOrderItem">
+    <img class="rounded mx-auto d-block" src="{{link}}">
+</template>
