@@ -1,21 +1,23 @@
 <template name="adminOrders">
-    <table class="table">
-        <thead class="bg-primary">
-            <tr>
-                <th scope="col">Order Date</th>
-                <th scope="col">Order ID</th>
-                <th scope="col">Status</th>
-                <th scope="col"></th>
-            </tr>
-        </thead>
-        <tbody>
-            {{#if allOrders}}
-                {{#each allOrders}}
-                    {{> adminOrderRow this}}
-                {{/each}}
-            {{/if}}
-        </tbody>
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+            <thead class="bg-primary">
+                <tr>
+                    <th scope="col">Order Date</th>
+                    <th scope="col">Order ID</th>
+                    <th scope="col">Status</th>
+                    <th scope="col"></th>
+                </tr>
+            </thead>
+            <tbody>
+                {{#if allOrders}}
+                    {{#each allOrders}}
+                        {{> adminOrderRow this}}
+                    {{/each}}
+                {{/if}}
+            </tbody>
+        </table>
+    </div>
 </template>
 
 <template name="adminOrderRow">

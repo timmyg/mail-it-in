@@ -1,26 +1,28 @@
 <template name="orders">
     {{#if ready}}
-        <table class="table">
-            <thead class="bg-primary">
-                <tr>
-                    <th scope="col">Order Date</th>
-                    <th scope="col"># Cards</th>
-                    <th scope="col">Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#if myOrders}}
-                    {{#each myOrders}}
-                        {{> order}}
-                    {{/each}}
-                {{/if}}
-            </tbody>
-        </table>
-        {{#unless myOrders}}
-            <div class="text-center">
-                You have no orders
-            </div>
-        {{/unless}}
+        <div class="table-responsive">
+            <table class="table">
+                <thead class="bg-primary">
+                    <tr>
+                        <th scope="col">Order Date</th>
+                        <th scope="col"># Cards</th>
+                        <th scope="col">Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {{#if myOrders}}
+                        {{#each myOrders}}
+                            {{> order}}
+                        {{/each}}
+                    {{/if}}
+                </tbody>
+            </table>
+            {{#unless myOrders}}
+                <div class="text-center">
+                    You have no orders
+                </div>
+            {{/unless}}
+        </div>
     {{/if}}
 </template>
 

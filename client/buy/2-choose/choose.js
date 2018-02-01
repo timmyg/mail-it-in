@@ -3,14 +3,22 @@ import { FlowRouter } from "meteor/ostrio:flow-router-extra";
 Template.choose.events({
   "click .next": (e, t) => {
     const orderItems = OrderItems.find().fetch();
-    const datesSet = orderItems.every(oi => {
-      if (!oi.eventDate) {
-        sAlert.warning(`Please choose an event date for all cards`);
-        return false;
-      }
-      return true;
-    });
-    if (datesSet) FlowRouter.go("checkout");
+    const needMore = Packages.findOne().items - orderItems.length > 0;
+    if (!orderItems.length || needMore) {
+      const remainingCards = Packages.findOne().items - orderItems.length;
+      let str = `Choose ${remainingCards} more card`;
+      if (remainingCards > 1) str += "s";
+      return sAlert.warning(str);
+    } else {
+      const datesSet = orderItems.every(oi => {
+        if (!oi.eventDate) {
+          sAlert.warning(`Please choose an event date for all cards`);
+          return false;
+        }
+        return true;
+      });
+      if (datesSet) FlowRouter.go("checkout");
+    }
   }
 });
 
@@ -37,13 +45,13 @@ Template.choose.helpers({
         return "You're all set!";
       }
     }
-  },
-  chooseMore: () => {
-    const orderItemsCount = OrderItems.find().count();
-    if (orderItemsCount) {
-      return Packages.findOne().items - orderItemsCount > 0;
-    }
   }
+  // chooseMore: () => {
+  //   const orderItemsCount = OrderItems.find().count();
+  //   if (orderItemsCount) {
+  //     return Packages.findOne().items - orderItemsCount > 0;
+  //   }
+  // }
 });
 
 Template.choose.onCreated(function() {
