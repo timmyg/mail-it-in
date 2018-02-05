@@ -38,3 +38,5 @@ check
 momentjs:moment
 lbee:moment-helpers
 dburles:collection-helpers
+sinda:fancybox
+inno:zoom

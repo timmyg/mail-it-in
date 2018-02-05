@@ -7,17 +7,19 @@
           {{chooseText}}
         </subheader>
       </header>
-      <section class="row mt-3">
-        {{#each cardsByCategory}}
-          <h5>{{name}}</h5>
-          <div class="">
-            {{#each values}}
-              <div class="col-xs-6 col-sm-4 col-md-3">
-                {{> card}}
-              </div>
-            {{/each}}
-          </div>
-        {{/each}}
+      <section class="">
+        <div class="">
+          {{#each cardsByCategory}}
+            <h5>{{getName name}}</h5>
+            <div class="row">
+              {{#each values}}
+                <div class="col-6 col-sm-4 col-md-3">
+                  {{> card}}
+                </div>
+              {{/each}}
+            </div>
+          {{/each}}
+        </div>
       </section>
       <footer>
         <button class="btn btn-primary btn-lg btn-block d-block d-sm-none next" disabled= {{chooseMore}}>Next</button>

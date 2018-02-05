@@ -19,6 +19,18 @@ Template.choose.helpers({
   package: function() {
     return Packages.findOne();
   },
+  getName: function(category) {
+    switch (category) {
+      case "baby":
+        return "Newborn";
+      case "birthday":
+        return "Birthday";
+      case "engagement":
+        return "Engagement";
+      case "wedding":
+        return "Wedding";
+    }
+  },
   cardsByCategory: function() {
     const items = Items.find().fetch();
     return groupBy(items, "category");

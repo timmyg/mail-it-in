@@ -26,3 +26,7 @@ Template.card.events({
     Meteor.call("order.update.item.date", Orders.findOne()._id, t.data._id, date);
   }
 });
+
+Template.card.onRendered(function() {
+  // console.log(mediumZoom);
+});
