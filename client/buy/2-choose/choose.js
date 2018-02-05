@@ -1,4 +1,5 @@
 import { FlowRouter } from "meteor/ostrio:flow-router-extra";
+import mediumZoom from "medium-zoom";
 
 Template.choose.events({
   "click .next": (e, t) => {
@@ -60,4 +61,16 @@ Template.choose.helpers({
 
 Template.choose.onCreated(function() {
   Meteor.call("orders.mine.new", FlowRouter.current().params.package);
+});
+
+Template.choose.onRendered(function() {
+  // console.log("choose", mediumZoom);
+  // const options = {
+  //   // background: "red"
+  // };
+  // mediumZoom(document.querySelectorAll('[data-action="zoom"]'), options);
+  // Meteor.setTimeout(() => {
+  //   console.log(document.querySelectorAll('[data-action="zoom"]'));
+  //   mediumZoom(document.querySelectorAll('[data-action="zoom"]'));
+  // }, 1000);
 });

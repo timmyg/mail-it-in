@@ -1,3 +1,5 @@
+import mediumZoom from "medium-zoom";
+
 Template.card.helpers({
   selected: function() {
     return OrderItems.findOne({ item: this._id });
@@ -28,5 +30,5 @@ Template.card.events({
 });
 
 Template.card.onRendered(function() {
-  // console.log(mediumZoom);
+  mediumZoom(Template.instance().find("[data-action='zoom']"));
 });
