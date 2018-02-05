@@ -1,20 +1,19 @@
 <template name="card">
-  <div class="XcardX mb-2 border-0">
+  <div>
     <div class="">
       <i class="hover-opacity clickable check float-right mdi-36px mdi mdi-{{#if selected}}check-circle text-success{{else}}checkbox-blank-circle-outline text-light{{/if}}"></i>
       <img data-action="zoom" class="card-img-top img-fluid" src="{{link}}">
     </div>
-    <div class="card-body">
+    <div class="mt-2">
       {{#if selected}}
-        <!-- <input type="date" name="yourName"> -->
-        <div class="input-group mb-3">
-          <div class="input-group-prepend inline d-none d-sm-flex">
-            <span class="input-group-text" data-toggle="popover" data-content="Event Date">
-              <i class="mdi mdi-calendar"></i>
-            </span>
-          </div>
-          <input type="date" class="form-control" value= {{getEventDate}} placeholder="Event Date">
-        </div>
+        <!-- <div class="input-group input-group-sm"> -->
+        <!-- <div class="input-group-prepend inline"> -->
+        <!-- <span class="input-group-text" data-toggle="popover" data-content="Event Date"> -->
+        <!-- <i class="mdi mdi-calendar"></i> -->
+        <!-- </span> -->
+        <!-- </div> -->
+        <input type="date" class="form-control" value= {{getEventDate}} placeholder="Event Date">
+        <!-- </div> -->
       {{/if}}
     </div>
   </div>
