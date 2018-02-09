@@ -1,4 +1,5 @@
 ## Lean, Mean Meteor Boilerplate
+
 ![](http://res.cloudinary.com/dcdth9fpg/image/upload/v1514491986/pexels-photo-378308_1_qwsttp.jpg)
 
 ## Basic Overview
@@ -20,19 +21,24 @@ A basic meteor boilerplate that uses common technologies for fast-paced, lean de
 First, ensure you have [meteor](https://www.meteor.com/install) installed, then clone this repository
 
 #### Install Dependencies
+
 ```
 npm i
 ```
 
 #### Start App
+
 ```
 npm start
 ```
 
 #### Initialize Analytics
+
 If you want to use Segment for analytics and tracking, do the following:
-* Go to [Segment](segment.com), create an account, and copy your *Write Key*
-* Create a settings.json in the root of this project like so:
+
+* Go to [Segment](segment.com), create an account, and copy your _Write Key_
+* Create a settings-dev.json in the root of this project like so:
+
 ```
 {
   "public": {
@@ -41,7 +47,6 @@ If you want to use Segment for analytics and tracking, do the following:
     }
   }
 }
-
 ```
 
 Learn more about meteor settings [here](https://docs.meteor.com/api/core.html#Meteor-settings)
@@ -49,7 +54,9 @@ Learn more about meteor settings [here](https://docs.meteor.com/api/core.html#Me
 > If you would prefer not use Segment, you can delete any `analytics` code references in files under the `client` folder to prevent errors
 
 #### Icon Library Usage
+
 You can use Material design icons by simply writing the following html:
+
 ```
 	<i class="mdi mdi-face mdi-24px"></i>
 ```
@@ -57,13 +64,16 @@ You can use Material design icons by simply writing the following html:
 > Note: mdi-24px is not required, but is a consistent way to size icons differently, see [here](https://materialdesignicons.com/getting-started). You can also color, rotate, and do other fancy things with just class names
 
 If you want to use a different icon library, feel free to do so. For example, if you would prefer to use [ionicons](http://ionicons.com/), do the following:
+
 ```
 meteor remove cleandersonlobo:mdi-icons
 meteor add pagebakers:ionicons
 ```
 
 #### Admin Role
+
 Add the below field to `settings.json` to give admin roles to users with specific email addresses
+
 ```
   "private": {
     "adminEmails": "bob_the_owner@gmail.com,heather_developer@gmail.com"
@@ -72,3 +82,15 @@ Add the below field to `settings.json` to give admin roles to users with specifi
 ```
 
 > Note: Users must already be created (via /register). The script to add the admin role runs at startup, so you'll have to restart if you recently created the user or added to the adminEmails variable
+
+#### Heroku
+
+If you are hosting via Heroku, here are some useful tips
+
+#### Deploy settings.json
+
+Deploy a local `settings.json` to heroku as environment variable
+
+```
+heroku config:add METEOR_SETTINGS="$(cat settings-dev.json)"
+```

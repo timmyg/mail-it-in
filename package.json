@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "start": "npm run meteor",
-    "meteor": "meteor run --settings settings.json",
+    "meteor": "meteor run --settings settings-dev.json",
     "test": "meteor test-app --driver-package practicalmeteor:mocha"
   },
   "dependencies": {

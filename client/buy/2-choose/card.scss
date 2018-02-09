@@ -1,21 +1,21 @@
-@import "{}/node_modules/bootstrap/scss/functions";
-@import "{}/node_modules/bootstrap/scss/variables";
+// @import "{}/node_modules/bootstrap/scss/functions";
+// @import "{}/node_modules/bootstrap/scss/variables";
 
-.card {
-  border: 1px solid transparent;
-  width: 100px;
-  &.selected {
-    border-color: $primary;
-  }
-  .check {
-    position: absolute;
-    right: 5px;
-    top: 5px;
-  }
-  // img {
-  //   width: 160px;
-  // }
-  // input::-webkit-calendar-picker-indicator {
-  //   display: none;
-  // }
-}
+// .card {
+//   border: 1px solid transparent;
+//   width: 100px;
+//   &.selected {
+//     border-color: $primary;
+//   }
+//   .check {
+//     position: absolute;
+//     right: 5px;
+//     top: 5px;
+//   }
+//   // img {
+//   //   width: 160px;
+//   // }
+//   // input::-webkit-calendar-picker-indicator {
+//   //   display: none;
+//   // }
+// }

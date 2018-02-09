@@ -54,8 +54,9 @@ Template.choose.helpers({
   chooseMore: () => {
     const orderItemsCount = OrderItems.find().count();
     if (orderItemsCount) {
-      return Packages.findOne().items - orderItemsCount > 0;
+      return Packages.findOne().items - orderItemsCount != 0;
     }
+    return true;
   }
 });
 
